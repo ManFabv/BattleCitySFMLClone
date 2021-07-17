@@ -5,7 +5,9 @@
 using namespace GameEngine::GameManagerMain;
 using namespace GameplayUtilities::ScoreManager;
 
-GameManager::GameManager() = default;
+GameManager::GameManager()
+{
+}
 
 void GameManager::TestGameEngineImplementation()
 {
@@ -13,6 +15,7 @@ void GameManager::TestGameEngineImplementation()
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
     ScoreManager score_manager;
+    score_manager.ScoresCount();
 
     while (window.isOpen())
     {
