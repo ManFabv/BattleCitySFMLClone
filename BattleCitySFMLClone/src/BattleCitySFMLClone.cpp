@@ -2,11 +2,14 @@
 //
 
 #include "GameEngine/GameManager.h"
+#include <Windows.h>
 
 using namespace GameManagerMain;
 
 int main()
 {
+	ShowWindow(GetConsoleWindow(), SW_HIDE);
+	
 	GameManager game_manager;
 
 	game_manager.TestGameEngineImplementation();
