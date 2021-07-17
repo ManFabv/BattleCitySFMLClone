@@ -1,8 +1,11 @@
 #pragma once
 
-class GameManager
+namespace GameManagerMain
 {
-public:
-	GameManager();
-	void TestGameEngineImplementation();
-};
+	class GameManager
+	{
+	public:
+		GameManager();
+		void TestGameEngineImplementation();
+	};
+}

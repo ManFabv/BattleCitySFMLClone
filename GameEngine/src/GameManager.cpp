@@ -1,6 +1,8 @@
 #include "GameEngine/GameManager.h"
 #include <SFML/Graphics.hpp>
 
+using namespace GameManagerMain;
+
 GameManager::GameManager()
 {
 }

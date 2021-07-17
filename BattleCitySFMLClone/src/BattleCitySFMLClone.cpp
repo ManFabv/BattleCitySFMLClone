@@ -3,6 +3,8 @@
 
 #include "GameEngine/GameManager.h"
 
+using namespace GameManagerMain;
+
 int main()
 {
 	GameManager game_manager;
