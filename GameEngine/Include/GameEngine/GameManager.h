@@ -1,14 +1,14 @@
 #pragma once
 
-#ifdef GAMEMANAGER_EXPORTS
-#define GAMEMANAGER_API __declspec(dllexport)
+#ifdef GAMEENGINE_EXPORTS
+#define GAMEENGINE_API __declspec(dllexport)
 #else
-#define GAMEMANAGER_API __declspec(dllimport)
+#define GAMEENGINE_API __declspec(dllimport)
 #endif
 
 namespace GameManagerMain
 {
-	class GAMEMANAGER_API GameManager
+	class GAMEENGINE_API GameManager
 	{
 	public:
 		GameManager();
