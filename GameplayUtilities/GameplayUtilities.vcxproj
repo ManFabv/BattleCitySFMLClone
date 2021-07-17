@@ -19,13 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\GameplayUtilitiesDefines.h" />
-    <ClInclude Include="include\Score.h" />
-    <ClInclude Include="include\ScoreManager.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="src\Score.cpp" />
     <ClCompile Include="src\ScoreManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\GameplayUtilities\GameplayUtilitiesExportDefine.h" />
+    <ClInclude Include="include\GameplayUtilities\Score.h" />
+    <ClInclude Include="include\GameplayUtilities\ScoreManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

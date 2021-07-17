@@ -19,10 +19,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\GameManager.cpp" />
+    <ProjectReference Include="..\GameplayUtilities\GameplayUtilities.vcxproj">
+      <Project>{a6939510-c928-46b1-a45f-77cf4742dda6}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Include\GameEngine\GameManager.h" />
+    <ClInclude Include="include\GameEngine\GameEngineExportDefine.h" />
+    <ClInclude Include="include\GameEngine\GameManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\GameManager.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

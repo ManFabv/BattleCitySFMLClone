@@ -4,7 +4,7 @@
 #include "GameEngine/GameManager.h"
 #include <Windows.h>
 
-using namespace GameManagerMain;
+using namespace GameEngine::GameManagerMain;
 
 int main()
 {

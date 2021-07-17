@@ -1,4 +1,6 @@
-#include "Score.h"
+#include "GameplayUtilities\Score.h"
+
+using namespace GameplayUtilities::ScoreManager;
 
 Score::Score(const std::string user_name, const long int score)
 {

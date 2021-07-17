@@ -9,17 +9,9 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="include\Score.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ScoreManager.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GameplayUtilitiesDefines.h">
-      <Filter>include</Filter>
-    </ClInclude>
+    <Filter Include="include\GameplayUtilities">
+      <UniqueIdentifier>{8c6e1a6e-b529-4802-9613-e3e126277af8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Score.cpp">
@@ -28,5 +20,16 @@
     <ClCompile Include="src\ScoreManager.cpp">
       <Filter>src</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\GameplayUtilities\GameplayUtilitiesExportDefine.h">
+      <Filter>include\GameplayUtilities</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameplayUtilities\Score.h">
+      <Filter>include\GameplayUtilities</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameplayUtilities\ScoreManager.h">
+      <Filter>include\GameplayUtilities</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

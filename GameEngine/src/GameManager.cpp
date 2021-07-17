@@ -1,11 +1,9 @@
 #include "GameEngine/GameManager.h"
 #include <SFML/Graphics.hpp>
 
-using namespace GameManagerMain;
+using namespace GameEngine::GameManagerMain;
 
-GameManager::GameManager()
-{
-}
+GameManager::GameManager() = default;
 
 void GameManager::TestGameEngineImplementation()
 {

@@ -1,17 +1,16 @@
 #pragma once
 
-#ifdef GAMEENGINE_EXPORTS
-#define GAMEENGINE_API __declspec(dllexport)
-#else
-#define GAMEENGINE_API __declspec(dllimport)
-#endif
+#include "GameEngineExportDefine.h"
 
-namespace GameManagerMain
+namespace GameEngine
 {
-	class GAMEENGINE_API GameManager
+	namespace GameManagerMain
 	{
-	public:
-		GameManager();
-		void TestGameEngineImplementation();
-	};
+		class GAMEENGINE_API GameManager
+		{
+		public:
+			GameManager();
+			static void TestGameEngineImplementation();
+		};
+	}
 }

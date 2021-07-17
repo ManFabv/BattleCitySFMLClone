@@ -18,13 +18,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\GameEngine\GameEngineExportDefine.h">
+      <Filter>Include\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameEngine\GameManager.h">
+      <Filter>Include\GameEngine</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="src\GameManager.cpp">
       <Filter>src</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Include\GameEngine\GameManager.h">
-      <Filter>Include\GameEngine</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
