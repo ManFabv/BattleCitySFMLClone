@@ -1,6 +1,7 @@
 #include "GameEngine/GameManager.h"
 #include <SFML/Graphics.hpp>
 #include "GameplayUtilities/ScoreManager.h"
+#include "entt/entt.hpp"
 
 using namespace GameEngine::GameManagerMain;
 using namespace GameplayUtilities::ScoreManager;
@@ -16,6 +17,7 @@ void GameManager::TestGameEngineImplementation()
     shape.setFillColor(sf::Color::Green);
     ScoreManager score_manager;
     score_manager.ScoresCount();
+    entt::registry registry;
 
     while (window.isOpen())
     {
