@@ -43,4 +43,6 @@ void GameManager::TestGameEngineImplementation()
         
         window.display();
     }
+
+    registry.clear();
 }

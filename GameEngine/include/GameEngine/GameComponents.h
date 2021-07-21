@@ -22,15 +22,17 @@ public:
 struct GAMEENGINE_API SpriteComponent
 {
 public:
-	sf::Sprite m_sprite;
-
-	operator const sf::Sprite& () const { return m_sprite; }
+	SpriteComponent(sf::Sprite& shape) : m_shape(&shape) {}
+	operator const sf::Sprite& () const { return *m_shape; }
+private:
+	sf::Sprite* m_shape;
 };
 
 struct GAMEENGINE_API CircleShapeComponent
 {
 public:
-	sf::CircleShape m_shape;
-
-	operator const sf::CircleShape& () const { return m_shape; }
+	CircleShapeComponent(sf::CircleShape& shape) : m_shape(&shape){}
+	operator const sf::CircleShape& () const { return *m_shape; }
+private:
+	sf::CircleShape *m_shape;
 };

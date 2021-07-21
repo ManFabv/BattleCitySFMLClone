@@ -13,7 +13,7 @@ void GameEngine::Systems::RenderSystem::Execute(entt::registry& scene_registry)
 
 	for (auto sprite_entity : render_view)
 	{
-		CircleShapeComponent& sprite = render_view.get<CircleShapeComponent>(sprite_entity);
+		const CircleShapeComponent& sprite = render_view.get<CircleShapeComponent>(sprite_entity);
 		m_window->draw(sprite);
 	}
 }
