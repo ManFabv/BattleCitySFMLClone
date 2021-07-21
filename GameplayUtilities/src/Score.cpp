@@ -2,7 +2,7 @@
 
 using namespace GameplayUtilities::Scores;
 
-Score::Score(const std::string user_name, const long int score)
+Score::Score(const std::string& user_name, const long int score)
 {
 	this->score = 0;
 	this->user_name = "guest";
@@ -16,7 +16,7 @@ void Score::AddPointToScore(const long int points)
 		this->score += points;
 }
 
-void Score::ChangeUserName(const std::string new_user_name)
+void Score::ChangeUserName(const std::string& new_user_name)
 {
 	if(!new_user_name.empty())
 		this->user_name = new_user_name;
@@ -27,7 +27,7 @@ const long int Score::GetScore()
 	return score;
 }
 
-const std::string Score::GetUserName()
+const std::string& Score::GetUserName()
 {
 	return user_name;
 }

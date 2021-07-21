@@ -6,14 +6,10 @@ using namespace GameplayUtilities::Scores;
 using namespace GameEngine::Systems;
 using namespace GameEngine::Components;
 
-void GameManager::InitializeSystems(const std::string& game_config_path)
+void GameManager::InitializeSystems(const int resX, const int resY, const char* window_title)
 {
-	//TODO: this should be loaded from config
-	sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!");
-	entt::registry registry;
+	m_window = new sf::RenderWindow(sf::VideoMode(resX, resY), window_title);
 
-	m_registry = &registry;
-	m_window = &window;
 	m_render_system = new RenderSystem(*m_window);
 }
 
@@ -27,11 +23,11 @@ void GameManager::RunGameLoop()
 	shape2.setFillColor(sf::Color::Magenta);
 	shape2.setPosition(sf::Vector2f(900.f, 250.f));
 
-	entt::entity entity = m_registry->create();
-	m_registry->emplace<DrawableComponent>(entity, shape);
+	entt::entity entity = m_registry.create();
+	m_registry.emplace<DrawableComponent>(entity, shape);
 
-	entt::entity entity2 = m_registry->create();
-	m_registry->emplace<DrawableComponent>(entity2, shape2);
+	entt::entity entity2 = m_registry.create();
+	m_registry.emplace<DrawableComponent>(entity2, shape2);
 
 	while (m_window->isOpen())
 	{
@@ -43,8 +39,9 @@ void GameManager::RunGameLoop()
 
 void GameEngine::GameManagerMain::GameManager::CleanUpSystems()
 {
-	m_registry->clear();
+	m_registry.clear();
 
+	delete m_window;
 	delete m_render_system;
 }
 
@@ -63,9 +60,9 @@ void GameEngine::GameManagerMain::GameManager::UpdateEntities()
 
 void GameEngine::GameManagerMain::GameManager::DrawEntities()
 {
-	m_window->clear(sf::Color::Blue);
+	m_window->clear();
 
-	m_render_system->Execute(*m_registry);
+	m_render_system->Execute(m_registry);
 
 	m_window->display();
 }
