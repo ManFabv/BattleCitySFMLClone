@@ -4,6 +4,7 @@
 
 #include "GameEngine/RenderSystem.h"
 #include "GameplayUtilities/ScoreManager.h"
+#include <iostream>
 
 namespace GameEngine
 {
@@ -12,7 +13,7 @@ namespace GameEngine
 		class GAMEENGINE_API GameManager
 		{
 		public:
-			void InitializeSystems(entt::registry& registry, sf::RenderWindow& window);
+			void InitializeSystems(const std::string &game_config_path);
 			void RunGameLoop();
 			void CleanUpSystems();
 		private:

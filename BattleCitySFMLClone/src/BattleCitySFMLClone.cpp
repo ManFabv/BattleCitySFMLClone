@@ -1,5 +1,6 @@
 // BattleCitySFMLClone.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
+#pragma once
 
 #include <Windows.h>
 
@@ -10,9 +11,7 @@
 int main()
 {
 	ShowWindow(GetConsoleWindow(), SW_HIDE);
-
-	//sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!");
-	//entt::registry registry;
+	
 	//GameManager game_manager;
 	//
 	//game_manager.InitializeSystems(registry, window);

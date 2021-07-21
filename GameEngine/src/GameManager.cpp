@@ -6,8 +6,12 @@ using namespace GameplayUtilities::Scores;
 using namespace GameEngine::Systems;
 using namespace GameEngine::Components;
 
-void GameManager::InitializeSystems(entt::registry& registry, sf::RenderWindow& window)
+void GameManager::InitializeSystems(const std::string& game_config_path)
 {
+	//TODO: this should be loaded from config
+	sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!");
+	entt::registry registry;
+
 	m_registry = &registry;
 	m_window = &window;
 	m_render_system = new RenderSystem(*m_window);
