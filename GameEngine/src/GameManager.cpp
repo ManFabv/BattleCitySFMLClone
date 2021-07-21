@@ -19,6 +19,9 @@ void GameManager::TestGameEngineImplementation()
 	sf::CircleShape shape(100.f);
 	shape.setFillColor(sf::Color::Green);
     shape.setPosition(sf::Vector2f(200.f, 250.f));
+	sf::CircleShape shape2(100.f);
+	shape2.setFillColor(sf::Color::Magenta);
+	shape2.setPosition(sf::Vector2f(900.f, 250.f));
     
     ScoreManager score_manager;
     score_manager.ScoresCount();
@@ -26,6 +29,8 @@ void GameManager::TestGameEngineImplementation()
     entt::registry registry;
     entt::entity entity = registry.create();
     registry.emplace<DrawableComponent>(entity, shape);
+	entt::entity entity2 = registry.create();
+	registry.emplace<DrawableComponent>(entity2, shape2);
     RenderSystem render_system(window);
 
     while (window.isOpen())
