@@ -6,7 +6,7 @@ using namespace GameplayUtilities::Scores;
 using namespace GameEngine::Systems;
 using namespace GameEngine::Components;
 
-void GameEngine::GameManagerMain::GameManager::InitializeSystems(entt::registry& registry, sf::RenderWindow& window)
+void GameManager::InitializeSystems(entt::registry& registry, sf::RenderWindow& window)
 {
 	m_registry = &registry;
 	m_window = &window;

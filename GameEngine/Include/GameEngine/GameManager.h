@@ -9,7 +9,7 @@ namespace GameEngine
 {
 	namespace GameManagerMain
 	{
-		static class GAMEENGINE_API GameManager
+		class GAMEENGINE_API GameManager
 		{
 		public:
 			void InitializeSystems(entt::registry& registry, sf::RenderWindow& window);
@@ -20,11 +20,11 @@ namespace GameEngine
 			void UpdateEntities();
 			void DrawEntities();
 
-			entt::registry *m_registry;
+			entt::registry* m_registry;
 			sf::Event m_event;
-			sf::RenderWindow *m_window;
-			
-			GameEngine::Systems::RenderSystem *m_render_system;
+			sf::RenderWindow* m_window;
+
+			GameEngine::Systems::RenderSystem* m_render_system;
 
 			GameplayUtilities::Scores::ScoreManager m_score_manager;
 		};
