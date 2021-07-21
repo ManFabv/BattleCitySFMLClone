@@ -24,10 +24,24 @@
     <ClInclude Include="include\GameEngine\GameManager.h">
       <Filter>Include\GameEngine</Filter>
     </ClInclude>
+    <ClInclude Include="include\GameEngine\GameComponents.h">
+      <Filter>Include\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameEngine\RenderSystem.h">
+      <Filter>Include\GameEngine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GameManager.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\RenderSystem.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="gameplay_atlas.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
