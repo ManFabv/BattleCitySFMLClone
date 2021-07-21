@@ -16,10 +16,61 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="assets\audio">
+      <UniqueIdentifier>{3928f2e0-9ef2-495f-b108-76c89eefa85e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assets\levels">
+      <UniqueIdentifier>{98f3ba85-4ec5-4d49-a420-2ff9460c7243}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assets\textures">
+      <UniqueIdentifier>{cf7fb451-9d4c-4c16-81ad-a0db3bcfc551}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BattleCitySFMLClone.cpp">
       <Filter>src</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="assets\audio\enemy_movement.wav">
+      <Filter>assets\audio</Filter>
+    </Media>
+    <Media Include="assets\audio\enemy_shot.wav">
+      <Filter>assets\audio</Filter>
+    </Media>
+    <Media Include="assets\audio\explode.wav">
+      <Filter>assets\audio</Filter>
+    </Media>
+    <Media Include="assets\audio\explode_eagle.wav">
+      <Filter>assets\audio</Filter>
+    </Media>
+    <Media Include="assets\audio\hit.wav">
+      <Filter>assets\audio</Filter>
+    </Media>
+    <Media Include="assets\audio\lost.wav">
+      <Filter>assets\audio</Filter>
+    </Media>
+    <Media Include="assets\audio\player_movement.wav">
+      <Filter>assets\audio</Filter>
+    </Media>
+    <Media Include="assets\audio\win.wav">
+      <Filter>assets\audio</Filter>
+    </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\levels\Level_001.json">
+      <Filter>assets\levels</Filter>
+    </None>
+    <None Include="assets\levels\Level_002.json">
+      <Filter>assets\levels</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\textures\gameplay_entities_atlas.png">
+      <Filter>assets\textures</Filter>
+    </Image>
+    <Image Include="assets\textures\gameplay_level_atlas.png">
+      <Filter>assets\textures</Filter>
+    </Image>
   </ItemGroup>
 </Project>

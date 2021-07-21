@@ -162,6 +162,24 @@
   <ItemGroup>
     <ClCompile Include="src\BattleCitySFMLClone.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="assets\audio\enemy_movement.wav" />
+    <Media Include="assets\audio\enemy_shot.wav" />
+    <Media Include="assets\audio\explode.wav" />
+    <Media Include="assets\audio\explode_eagle.wav" />
+    <Media Include="assets\audio\hit.wav" />
+    <Media Include="assets\audio\lost.wav" />
+    <Media Include="assets\audio\player_movement.wav" />
+    <Media Include="assets\audio\win.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\levels\Level_001.json" />
+    <None Include="assets\levels\Level_002.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\textures\gameplay_entities_atlas.png" />
+    <Image Include="assets\textures\gameplay_level_atlas.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
