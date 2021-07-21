@@ -1,13 +1,22 @@
 #include "GameEngine/GameManager.h"
 #include "GameEngine/GameComponents.h"
+#include "GameplayUtilities/File.h"
+#include <rapidjson/document.h>
 
 using namespace GameEngine::GameManagerMain;
 using namespace GameplayUtilities::Scores;
 using namespace GameEngine::Systems;
 using namespace GameEngine::Components;
+using namespace GameplayUtilities::IO;
 
-void GameManager::InitializeSystems(const int resX, const int resY, const char* window_title)
+void GameManager::InitializeSystems(const int resX, const int resY, const char* window_title, const char* config_folder)
 {
+	File file_reader;
+	std::string player_anim_file = config_folder;
+	file_reader.OpenForRead(player_anim_file);
+	rapidjson::Document json_document;
+	json_document.Parse(file_reader.ReadAsCString());
+
 	m_window = new sf::RenderWindow(sf::VideoMode(resX, resY), window_title);
 
 	m_render_system = new RenderSystem(*m_window);

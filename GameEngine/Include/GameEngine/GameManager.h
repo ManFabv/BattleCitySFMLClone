@@ -12,7 +12,7 @@ namespace GameEngine
 		class GAMEENGINE_API GameManager
 		{
 		public:
-			void InitializeSystems(const int resX, const int resY, const char* window_title);
+			void InitializeSystems(const int resX, const int resY, const char* window_title, const char* config_folder);
 			void RunGameLoop();
 			void CleanUpSystems();
 		private:

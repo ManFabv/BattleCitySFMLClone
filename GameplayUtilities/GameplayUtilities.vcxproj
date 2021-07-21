@@ -19,10 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\File.cpp" />
     <ClCompile Include="src\Score.cpp" />
     <ClCompile Include="src\ScoreManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\GameplayUtilities\File.h" />
     <ClInclude Include="include\GameplayUtilities\GameplayUtilitiesExportDefine.h" />
     <ClInclude Include="include\GameplayUtilities\Score.h" />
     <ClInclude Include="include\GameplayUtilities\ScoreManager.h" />

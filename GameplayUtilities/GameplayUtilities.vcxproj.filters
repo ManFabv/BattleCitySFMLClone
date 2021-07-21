@@ -20,6 +20,9 @@
     <ClCompile Include="src\ScoreManager.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\File.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GameplayUtilities\Score.h">
@@ -29,6 +32,9 @@
       <Filter>include\GameplayUtilities</Filter>
     </ClInclude>
     <ClInclude Include="include\GameplayUtilities\GameplayUtilitiesExportDefine.h">
+      <Filter>include\GameplayUtilities</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameplayUtilities\File.h">
       <Filter>include\GameplayUtilities</Filter>
     </ClInclude>
   </ItemGroup>
