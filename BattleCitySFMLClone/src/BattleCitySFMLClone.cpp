@@ -10,7 +10,7 @@ int main()
 {	
 	GameManager game_manager;
 
-	game_manager.InitializeSystems(1280, 720, "SFML works!");
+	game_manager.InitializeSystems(800, 800, "SFML works!");
 	game_manager.RunGameLoop();
 	game_manager.CleanUpSystems();
 

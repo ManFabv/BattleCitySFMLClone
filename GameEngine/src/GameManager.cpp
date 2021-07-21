@@ -17,11 +17,11 @@ void GameManager::RunGameLoop()
 {
 	sf::CircleShape shape(100.f);
 	shape.setFillColor(sf::Color::Green);
-	shape.setPosition(sf::Vector2f(200.f, 250.f));
+	shape.setPosition(sf::Vector2f(100.f, 250.f));
 
 	sf::CircleShape shape2(100.f);
 	shape2.setFillColor(sf::Color::Magenta);
-	shape2.setPosition(sf::Vector2f(900.f, 250.f));
+	shape2.setPosition(sf::Vector2f(500.f, 250.f));
 
 	entt::entity entity = m_registry.create();
 	m_registry.emplace<DrawableComponent>(entity, shape);
