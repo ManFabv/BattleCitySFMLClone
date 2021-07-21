@@ -1,8 +1,9 @@
 #pragma once
 
 #include "GameEngineExportDefine.h"
-#include "entt\entt.hpp"
-#include "SFML\Graphics.hpp"
+
+#include <entt/entt.hpp>
+#include "GameEngine/GameComponents.h"
 
 namespace GameEngine
 {
@@ -11,7 +12,7 @@ namespace GameEngine
 		class GAMEENGINE_API RenderSystem
 		{
 		public:
-			RenderSystem(sf::RenderWindow &current_window);
+			RenderSystem(sf::RenderWindow &current_window) : m_window(&current_window) {}
 			void Execute(entt::registry& scene_registry);
 		private:
 			sf::RenderWindow *m_window;

@@ -22,13 +22,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\GameplayUtilities\GameplayUtilitiesExportDefine.h">
-      <Filter>include\GameplayUtilities</Filter>
-    </ClInclude>
     <ClInclude Include="include\GameplayUtilities\Score.h">
       <Filter>include\GameplayUtilities</Filter>
     </ClInclude>
     <ClInclude Include="include\GameplayUtilities\ScoreManager.h">
+      <Filter>include\GameplayUtilities</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameplayUtilities\GameplayUtilitiesExportDefine.h">
       <Filter>include\GameplayUtilities</Filter>
     </ClInclude>
   </ItemGroup>

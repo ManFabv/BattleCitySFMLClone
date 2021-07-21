@@ -1,6 +1,6 @@
-#include "GameplayUtilities\Score.h"
+#include "GameplayUtilities/Score.h"
 
-using namespace GameplayUtilities::ScoreManager;
+using namespace GameplayUtilities::Scores;
 
 Score::Score(const std::string user_name, const long int score)
 {

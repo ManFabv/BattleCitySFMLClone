@@ -1,11 +1,7 @@
-#include "GameEngine\RenderSystem.h"
-#include "GameEngine\GameComponents.h"
+#include "GameEngine/RenderSystem.h"
 
 using namespace GameEngine::Systems;
-
-GameEngine::Systems::RenderSystem::RenderSystem(sf::RenderWindow &current_window) : m_window(&current_window)
-{
-}
+using namespace GameEngine::Components;
 
 void GameEngine::Systems::RenderSystem::Execute(entt::registry& scene_registry)
 {

@@ -1,6 +1,6 @@
 #include "GameplayUtilities/ScoreManager.h"
 
-using namespace GameplayUtilities::ScoreManager;
+using namespace GameplayUtilities::Scores;
 
 ScoreManager::ScoreManager()
 {

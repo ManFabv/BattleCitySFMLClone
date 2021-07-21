@@ -1,53 +1,67 @@
 #include "GameEngine/GameManager.h"
-#include <SFML/Graphics.hpp>
-#include "GameplayUtilities/ScoreManager.h"
-#include "entt/entt.hpp"
-#include "GameEngine/RenderSystem.h"
-#include "GameEngine\GameComponents.h"
+#include "GameEngine/GameComponents.h"
 
 using namespace GameEngine::GameManagerMain;
-using namespace GameplayUtilities::ScoreManager;
+using namespace GameplayUtilities::Scores;
 using namespace GameEngine::Systems;
+using namespace GameEngine::Components;
 
-GameManager::GameManager()
+void GameEngine::GameManagerMain::GameManager::InitializeSystems(entt::registry& registry, sf::RenderWindow& window)
 {
+	m_registry = &registry;
+	m_window = &window;
+	m_render_system = new RenderSystem(*m_window);
 }
 
-void GameManager::TestGameEngineImplementation()
+void GameManager::RunGameLoop()
 {
-    sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!");
 	sf::CircleShape shape(100.f);
 	shape.setFillColor(sf::Color::Green);
-    shape.setPosition(sf::Vector2f(200.f, 250.f));
+	shape.setPosition(sf::Vector2f(200.f, 250.f));
+
 	sf::CircleShape shape2(100.f);
 	shape2.setFillColor(sf::Color::Magenta);
 	shape2.setPosition(sf::Vector2f(900.f, 250.f));
-    
-    ScoreManager score_manager;
-    score_manager.ScoresCount();
-    
-    entt::registry registry;
-    entt::entity entity = registry.create();
-    registry.emplace<DrawableComponent>(entity, shape);
-	entt::entity entity2 = registry.create();
-	registry.emplace<DrawableComponent>(entity2, shape2);
-    RenderSystem render_system(window);
 
-    while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
+	entt::entity entity = m_registry->create();
+	m_registry->emplace<DrawableComponent>(entity, shape);
 
-        window.clear(sf::Color::Blue);
-        
-        render_system.Execute(registry);
-        
-        window.display();
-    }
+	entt::entity entity2 = m_registry->create();
+	m_registry->emplace<DrawableComponent>(entity2, shape2);
 
-    registry.clear();
+	while (m_window->isOpen())
+	{
+		TakePlayerInput();
+		UpdateEntities();
+		DrawEntities();
+	}
+}
+
+void GameEngine::GameManagerMain::GameManager::CleanUpSystems()
+{
+	m_registry->clear();
+
+	delete m_render_system;
+}
+
+void GameEngine::GameManagerMain::GameManager::TakePlayerInput()
+{
+	while (m_window->pollEvent(m_event))
+	{
+		if (m_event.type == sf::Event::Closed)
+			m_window->close();
+	}
+}
+
+void GameEngine::GameManagerMain::GameManager::UpdateEntities()
+{
+}
+
+void GameEngine::GameManagerMain::GameManager::DrawEntities()
+{
+	m_window->clear(sf::Color::Blue);
+
+	m_render_system->Execute(*m_registry);
+
+	m_window->display();
 }

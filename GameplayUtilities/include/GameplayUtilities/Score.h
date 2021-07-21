@@ -1,11 +1,12 @@
 #pragma once
 
 #include "GameplayUtilitiesExportDefine.h"
+
 #include <iostream>
 
 namespace GameplayUtilities
 {
-	namespace ScoreManager
+	namespace Scores
 	{
 		struct GAMEPLAYUTILITIES_API Score
 		{

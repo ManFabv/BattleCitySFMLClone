@@ -1,12 +1,13 @@
 #pragma once
 
 #include "GameplayUtilitiesExportDefine.h"
+
 #include "Score.h"
 #include <vector>
 
 namespace GameplayUtilities
 {
-	namespace ScoreManager
+	namespace Scores
 	{
 		class GAMEPLAYUTILITIES_API ScoreManager
 		{
