@@ -9,11 +9,11 @@ GameEngine::Systems::RenderSystem::RenderSystem(sf::RenderWindow &current_window
 
 void GameEngine::Systems::RenderSystem::Execute(entt::registry& scene_registry)
 {
-	auto render_view = scene_registry.view<CircleShapeComponent>();
+	auto render_view = scene_registry.view<DrawableComponent>();
 
-	for (auto sprite_entity : render_view)
+	for (auto render_entity : render_view)
 	{
-		const CircleShapeComponent& sprite = render_view.get<CircleShapeComponent>(sprite_entity);
+		const DrawableComponent& sprite = render_view.get<DrawableComponent>(render_entity);
 		m_window->draw(sprite);
 	}
 }

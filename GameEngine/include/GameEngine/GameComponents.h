@@ -19,20 +19,11 @@ public:
 	sf::FloatRect m_fixture;
 };
 
-struct GAMEENGINE_API SpriteComponent
+struct GAMEENGINE_API DrawableComponent
 {
 public:
-	SpriteComponent(sf::Sprite& shape) : m_shape(&shape) {}
-	operator const sf::Sprite& () const { return *m_shape; }
-private:
-	sf::Sprite* m_shape;
-};
-
-struct GAMEENGINE_API CircleShapeComponent
-{
-public:
-	CircleShapeComponent(sf::CircleShape& shape) : m_shape(&shape){}
-	operator const sf::CircleShape& () const { return *m_shape; }
-private:
-	sf::CircleShape *m_shape;
+	DrawableComponent(sf::Drawable& drawable) : m_drawable(&drawable) {}
+	operator const sf::Drawable& () const { return *m_drawable; }
+protected:
+	sf::Drawable* m_drawable;
 };

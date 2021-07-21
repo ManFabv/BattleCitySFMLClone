@@ -25,7 +25,7 @@ void GameManager::TestGameEngineImplementation()
     
     entt::registry registry;
     entt::entity entity = registry.create();
-    registry.emplace<CircleShapeComponent>(entity, shape);
+    registry.emplace<DrawableComponent>(entity, shape);
     RenderSystem render_system(window);
 
     while (window.isOpen())
