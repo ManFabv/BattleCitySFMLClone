@@ -25,6 +25,9 @@
     <Filter Include="assets\textures">
       <UniqueIdentifier>{cf7fb451-9d4c-4c16-81ad-a0db3bcfc551}</UniqueIdentifier>
     </Filter>
+    <Filter Include="assets\animations">
+      <UniqueIdentifier>{339272ed-05e9-4d2d-9ece-b9f038630a07}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BattleCitySFMLClone.cpp">
@@ -63,6 +66,12 @@
     </None>
     <None Include="assets\levels\Level_002.json">
       <Filter>assets\levels</Filter>
+    </None>
+    <None Include="assets\animations\enemy_anim.json">
+      <Filter>assets\animations</Filter>
+    </None>
+    <None Include="assets\animations\player_anim.json">
+      <Filter>assets\animations</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

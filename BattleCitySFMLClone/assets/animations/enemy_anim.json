@@ -1,0 +1,15 @@
+{
+  "horizontal_sprites": 8,
+  "vertical_sprites": 8,
+  "sprites_width": 16,
+  "sprites_height": 16,
+  "frame_time": 0.2,
+  "anim_row": 4,
+  "animations": {
+    "move_left": [2,3],
+    "move_right": [6,7],
+    "move_top": [0,1],
+    "move_bottom": [4,5]
+  },
+  "atlas_name": "gameplay_entities_atlas.png"
+}
