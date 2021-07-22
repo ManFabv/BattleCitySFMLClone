@@ -4,27 +4,16 @@
 
 #include "GameEngine/RenderSystem.h"
 #include "GameplayUtilities/ScoreManager.h"
-#include "GameEngine/DataLoader.h"
+#include "GameEngine/ConfigLoader.h"
 
 namespace GameEngine
 {
 	namespace GameManagerMain
 	{
-		struct GAMEENGINE_API GameData
-		{
-		public:
-			int resX;
-			int resY;
-			std::string window_title;
-			std::string config_root_folder;
-			std::string animations_folder;
-			std::string player_config;
-		};
-
 		class GAMEENGINE_API GameManager
 		{
 		public:
-			void InitializeSystems(GameData& game_data, GameEngine::DataUtils::DataLoader& data_loader);
+			void InitializeSystems(const GameEngine::GameDataConfig::GameData& game_data, GameEngine::DataUtils::ConfigLoader& config_loader);
 			void RunGameLoop();
 			void CleanUpSystems();
 		private:

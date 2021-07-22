@@ -1,35 +1,21 @@
 #include "GameEngine/GameManager.h"
 #include "GameEngine/GameComponents.h"
-#include "GameplayUtilities/File.h"
 #include <rapidjson/document.h>
-
-
-
-
-#include <iostream>
-
-
 
 using namespace GameEngine::GameManagerMain;
 using namespace GameplayUtilities::Scores;
 using namespace GameEngine::Systems;
 using namespace GameEngine::Components;
-using namespace GameplayUtilities::IO;
 using namespace GameEngine::DataUtils;
+using namespace GameEngine::GameDataConfig;
 
-void GameManager::InitializeSystems(GameData& game_data, DataLoader& data_loader)
+void GameManager::InitializeSystems(const GameData& game_data, ConfigLoader& config_loader)
 {
-	std::string player_anim_file = game_data.config_root_folder;
-	player_anim_file += "\\";
-	player_anim_file += game_data.animations_folder;
-	player_anim_file += "\\";
-	player_anim_file += game_data.player_config;
-	File file_reader;
-	file_reader.OpenForRead(player_anim_file);
-	rapidjson::Document json_document;
-	json_document.Parse(file_reader.Read().c_str());
-	if(json_document.HasMember("sprites_width"))
-		std::cout << "HAS MEMBER";
+	std::string player_json = config_loader.LoadDataFrom(game_data);
+	
+	rapidjson::Document player_json_document;
+	player_json_document.Parse(player_json.c_str());
+	
 	m_window = new sf::RenderWindow(sf::VideoMode(game_data.resX, game_data.resY), game_data.window_title);
 
 	m_render_system = new RenderSystem(*m_window);
@@ -78,6 +64,7 @@ void GameEngine::GameManagerMain::GameManager::TakePlayerInput()
 
 void GameEngine::GameManagerMain::GameManager::UpdateEntities()
 {
+	//TODO: implement
 }
 
 void GameEngine::GameManagerMain::GameManager::DrawEntities()

@@ -26,7 +26,10 @@
     <ClInclude Include="include\GameEngine\RenderSystem.h">
       <Filter>Include\GameEngine</Filter>
     </ClInclude>
-    <ClInclude Include="include\GameEngine\DataLoader.h">
+    <ClInclude Include="include\GameEngine\ConfigLoader.h">
+      <Filter>Include\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameEngine\GameData.h">
       <Filter>Include\GameEngine</Filter>
     </ClInclude>
   </ItemGroup>
@@ -37,7 +40,7 @@
     <ClCompile Include="src\RenderSystem.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\DataLoader.cpp">
+    <ClCompile Include="src\ConfigLoader.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
