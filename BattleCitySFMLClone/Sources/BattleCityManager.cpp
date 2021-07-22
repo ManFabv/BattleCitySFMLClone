@@ -42,4 +42,5 @@ void BattleCityManager::InitializeGameData(GameData& game_data)
 	game_data.config_root_folder = "assets";
 	game_data.animations_folder = "animations";
 	game_data.player_config = "player_anim.json";
+	game_data.textures_folder = "textures";
 }

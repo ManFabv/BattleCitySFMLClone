@@ -5,7 +5,7 @@
   "sprites_height": 16,
   "frame_time": 0.2,
   "anim_row": 0,
-  "atlas_name": "gameplay_entities_atlas",
+  "atlas_name": "gameplay_entities_atlas.png",
   "animations": {
     "idle_left": [ 2 ],
     "move_left": [ 2, 3 ],

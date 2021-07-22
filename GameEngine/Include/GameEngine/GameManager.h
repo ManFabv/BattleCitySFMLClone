@@ -27,6 +27,9 @@ namespace GameEngine
 			sf::RenderWindow* m_window;
 			GameEngine::Systems::RenderSystem* m_render_system;
 			GameplayUtilities::Scores::ScoreManager m_score_manager;
+			
+			sf::Sprite m_player_sprite;
+			sf::Texture m_player_texture;
 		};
 	}
 }

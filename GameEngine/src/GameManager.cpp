@@ -15,6 +15,13 @@ void GameManager::InitializeSystems(const GameData& game_data, ConfigLoader& con
 	
 	rapidjson::Document player_json_document;
 	player_json_document.Parse(player_json.c_str());
+
+	std::string player_atlas_name = player_json_document["atlas_name"].GetString();
+	std::string player_atlas_path = config_loader.GeneratePath(game_data.config_root_folder, game_data.textures_folder, player_atlas_name);
+	m_player_texture.loadFromFile(player_atlas_path);
+	m_player_sprite.setTexture(m_player_texture);
+	entt::entity player_entity = m_registry.create();
+	m_registry.emplace<DrawableComponent>(player_entity, m_player_sprite);
 	
 	m_window = new sf::RenderWindow(sf::VideoMode(game_data.resX, game_data.resY), game_data.window_title);
 
@@ -23,20 +30,6 @@ void GameManager::InitializeSystems(const GameData& game_data, ConfigLoader& con
 
 void GameManager::RunGameLoop()
 {
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
-	shape.setPosition(sf::Vector2f(100.f, 250.f));
-
-	sf::CircleShape shape2(100.f);
-	shape2.setFillColor(sf::Color::Magenta);
-	shape2.setPosition(sf::Vector2f(500.f, 250.f));
-
-	entt::entity entity = m_registry.create();
-	m_registry.emplace<DrawableComponent>(entity, shape);
-
-	entt::entity entity2 = m_registry.create();
-	m_registry.emplace<DrawableComponent>(entity2, shape2);
-
 	while (m_window->isOpen())
 	{
 		TakePlayerInput();
