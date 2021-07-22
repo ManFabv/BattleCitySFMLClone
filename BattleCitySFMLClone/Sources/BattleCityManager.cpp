@@ -21,7 +21,8 @@ void BattleCityManager::InitializeGame()
 	InitializeGameData(game_data);
 
 	ConfigLoader data_loader;
-	m_game_manager.InitializeSystems(game_data, data_loader);
+	AssetLoader asset_loader;
+	m_game_manager.InitializeSystems(game_data, data_loader, asset_loader);
 }
 
 void BattleCitySFMLClone::Managers::BattleCityManager::StartGameLoop()

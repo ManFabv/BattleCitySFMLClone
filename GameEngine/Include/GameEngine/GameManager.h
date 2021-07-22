@@ -6,6 +6,7 @@
 #include "GameplayUtilities/ScoreManager.h"
 #include "GameEngine/ConfigLoader.h"
 #include "GameEngine/GameData.h"
+#include "GameEngine/AssetLoader.h"
 
 namespace GameEngine
 {
@@ -14,7 +15,7 @@ namespace GameEngine
 		class GAMEENGINE_API GameManager
 		{
 		public:
-			void InitializeSystems(const GameEngine::GameDataConfig::GameData& game_data, GameEngine::DataUtils::ConfigLoader& config_loader);
+			void InitializeSystems(const GameEngine::GameDataConfig::GameData& game_data, GameEngine::DataUtils::ConfigLoader& config_loader, GameEngine::DataUtils::AssetLoader& asset_loader);
 			void RunGameLoop();
 			void CleanUpSystems();
 		private:
@@ -27,9 +28,6 @@ namespace GameEngine
 			sf::RenderWindow* m_window;
 			GameEngine::Systems::RenderSystem* m_render_system;
 			GameplayUtilities::Scores::ScoreManager m_score_manager;
-			
-			sf::Sprite m_player_sprite;
-			sf::Texture m_player_texture;
 		};
 	}
 }

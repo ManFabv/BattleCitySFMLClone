@@ -1,6 +1,7 @@
 #include "GameEngine/GameManager.h"
 #include "GameEngine/GameComponents.h"
 #include <rapidjson/document.h>
+#include "GameEngine/AssetLoader.h"
 
 using namespace GameEngine::GameManagerMain;
 using namespace GameplayUtilities::Scores;
@@ -9,19 +10,20 @@ using namespace GameEngine::Components;
 using namespace GameEngine::DataUtils;
 using namespace GameEngine::GameDataConfig;
 
-void GameManager::InitializeSystems(const GameData& game_data, ConfigLoader& config_loader)
+void GameManager::InitializeSystems(const GameData& game_data, ConfigLoader& config_loader, AssetLoader& asset_loader)
 {
 	std::string player_json = config_loader.LoadDataFrom(game_data.config_root_folder, game_data.animations_folder, game_data.player_config);
 	
 	rapidjson::Document player_json_document;
 	player_json_document.Parse(player_json.c_str());
 
-	std::string player_atlas_name = player_json_document["atlas_name"].GetString();
-	std::string player_atlas_path = config_loader.GeneratePath(game_data.config_root_folder, game_data.textures_folder, player_atlas_name);
-	m_player_texture.loadFromFile(player_atlas_path);
-	m_player_sprite.setTexture(m_player_texture);
 	entt::entity player_entity = m_registry.create();
-	m_registry.emplace<DrawableComponent>(player_entity, m_player_sprite);
+	std::string player_atlas_name = player_json_document["atlas_name"].GetString();
+	asset_loader.LoadTexture(player_entity, game_data.config_root_folder, game_data.textures_folder, player_atlas_name);
+	sf::Sprite* m_player_sprite = new sf::Sprite();
+	m_player_sprite->setTexture(asset_loader.GetTexture(player_entity));
+	
+	m_registry.emplace<DrawableComponent>(player_entity, *m_player_sprite);
 	
 	m_window = new sf::RenderWindow(sf::VideoMode(game_data.resX, game_data.resY), game_data.window_title);
 

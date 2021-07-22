@@ -24,7 +24,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\GameEngine\AssetLoader.h" />
     <ClInclude Include="include\GameEngine\ConfigLoader.h" />
+    <ClInclude Include="include\GameEngine\FilePathHelper.h" />
     <ClInclude Include="include\GameEngine\GameComponents.h" />
     <ClInclude Include="include\GameEngine\GameData.h" />
     <ClInclude Include="include\GameEngine\GameEngineExportDefine.h" />
@@ -32,7 +34,9 @@
     <ClInclude Include="include\GameEngine\RenderSystem.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\AssetLoader.cpp" />
     <ClCompile Include="src\ConfigLoader.cpp" />
+    <ClCompile Include="src\FilePathHelper.cpp" />
     <ClCompile Include="src\GameManager.cpp" />
     <ClCompile Include="src\RenderSystem.cpp" />
   </ItemGroup>
