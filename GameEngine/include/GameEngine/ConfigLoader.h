@@ -1,7 +1,7 @@
 #pragma once
 
 #include "GameEngineExportDefine.h"
-#include "GameEngine/GameData.h"
+#include <iostream>
 
 namespace GameEngine
 {
@@ -10,7 +10,7 @@ namespace GameEngine
 		class GAMEENGINE_API ConfigLoader
 		{
 		public:
-			const std::string LoadDataFrom(const GameEngine::GameDataConfig::GameData& game_data);
+			const std::string LoadDataFrom(const std::string& root_folder, const std::string& config_folder, const std::string& file_name);
 		};
 	}
 }

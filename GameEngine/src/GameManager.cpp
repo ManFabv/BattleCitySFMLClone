@@ -11,7 +11,7 @@ using namespace GameEngine::GameDataConfig;
 
 void GameManager::InitializeSystems(const GameData& game_data, ConfigLoader& config_loader)
 {
-	std::string player_json = config_loader.LoadDataFrom(game_data);
+	std::string player_json = config_loader.LoadDataFrom(game_data.config_root_folder, game_data.animations_folder, game_data.player_config);
 	
 	rapidjson::Document player_json_document;
 	player_json_document.Parse(player_json.c_str());

@@ -5,6 +5,7 @@
 #include "GameEngine/RenderSystem.h"
 #include "GameplayUtilities/ScoreManager.h"
 #include "GameEngine/ConfigLoader.h"
+#include "GameEngine/GameData.h"
 
 namespace GameEngine
 {

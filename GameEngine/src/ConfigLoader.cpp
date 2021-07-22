@@ -3,15 +3,14 @@
 
 using namespace GameEngine::DataUtils;
 using namespace GameplayUtilities::IO;
-using namespace GameEngine::GameDataConfig;
 
-const std::string ConfigLoader::LoadDataFrom(const GameData& game_data)
+const std::string ConfigLoader::LoadDataFrom(const std::string& root_folder, const std::string& config_folder, const std::string& file_name)
 {
-	std::string player_anim_file = game_data.config_root_folder;
+	std::string player_anim_file = root_folder;
 	player_anim_file += "\\";
-	player_anim_file += game_data.animations_folder;
+	player_anim_file += config_folder;
 	player_anim_file += "\\";
-	player_anim_file += game_data.player_config;
+	player_anim_file += file_name;
 	File file_reader;
 	file_reader.OpenForRead(player_anim_file);
 	return file_reader.Read();
