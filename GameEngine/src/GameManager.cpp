@@ -16,17 +16,20 @@ using namespace GameEngine::Systems;
 using namespace GameEngine::Components;
 using namespace GameplayUtilities::IO;
 
-void GameManager::InitializeSystems(const int resX, const int resY, const char* window_title, const char* config_folder)
+void GameManager::InitializeSystems(GameData& game_data)
 {
-	std::string player_anim_file = config_folder;
-	player_anim_file += "\\animations\\player_anim.json";
+	std::string player_anim_file = game_data.config_root_folder;
+	player_anim_file += "\\";
+	player_anim_file += game_data.animations_folder;
+	player_anim_file += "\\";
+	player_anim_file += game_data.player_config;
 	File file_reader;
 	file_reader.OpenForRead(player_anim_file);
 	rapidjson::Document json_document;
 	json_document.Parse(file_reader.Read().c_str());
 	if(json_document.HasMember("sprites_width"))
 		std::cout << "HAS MEMBER";
-	m_window = new sf::RenderWindow(sf::VideoMode(resX, resY), window_title);
+	m_window = new sf::RenderWindow(sf::VideoMode(game_data.resX, game_data.resY), game_data.window_title);
 
 	m_render_system = new RenderSystem(*m_window);
 }

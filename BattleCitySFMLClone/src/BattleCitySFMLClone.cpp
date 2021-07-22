@@ -3,17 +3,15 @@
 
 #pragma once
 
-#include "GameEngine/GameManager.h"
+#include "BattleCityManager.h"
 
-using namespace GameEngine::GameManagerMain;
+using namespace BattleCitySFMLClone::Managers;
 
 int main()
 {	
-	GameManager game_manager;
+	BattleCityManager battle_city_manager;
 
-	game_manager.InitializeSystems(800, 800, "Battle City SFML Clone", "assets");
-	game_manager.RunGameLoop();
-	game_manager.CleanUpSystems();
+	battle_city_manager.Run();
 
     return 0;
 }

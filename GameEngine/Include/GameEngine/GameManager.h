@@ -9,10 +9,21 @@ namespace GameEngine
 {
 	namespace GameManagerMain
 	{
+		struct GAMEENGINE_API GameData
+		{
+		public:
+			int resX;
+			int resY;
+			std::string window_title;
+			std::string config_root_folder;
+			std::string animations_folder;
+			std::string player_config;
+		};
+
 		class GAMEENGINE_API GameManager
 		{
 		public:
-			void InitializeSystems(const int resX, const int resY, const char* window_title, const char* config_folder);
+			void InitializeSystems(GameData& game_data);
 			void RunGameLoop();
 			void CleanUpSystems();
 		private:

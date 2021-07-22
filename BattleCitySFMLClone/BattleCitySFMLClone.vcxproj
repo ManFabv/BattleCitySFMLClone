@@ -90,7 +90,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32_LEAN_AND_MEAN;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)GameEngine\include;$(SolutionDir)GameEngine\dependencies\entt\include;$(SolutionDir)GameEngine\dependencies\sfml\include;$(SolutionDir)GameplayUtilities\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)GameEngine\include;$(SolutionDir)GameEngine\dependencies\entt\include;$(SolutionDir)GameEngine\dependencies\sfml\include;$(SolutionDir)GameplayUtilities\include;$(SolutionDir)$(ProjectName)\Headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -111,7 +111,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32_LEAN_AND_MEAN;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)GameEngine\include;$(SolutionDir)GameEngine\dependencies\entt\include;$(SolutionDir)GameEngine\dependencies\sfml\include;$(SolutionDir)GameplayUtilities\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)GameEngine\include;$(SolutionDir)GameEngine\dependencies\entt\include;$(SolutionDir)GameEngine\dependencies\sfml\include;$(SolutionDir)GameplayUtilities\include;$(SolutionDir)$(ProjectName)\Headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -160,6 +160,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Sources\BattleCityManager.cpp" />
     <ClCompile Include="src\BattleCitySFMLClone.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +182,9 @@
   <ItemGroup>
     <Image Include="assets\textures\gameplay_entities_atlas.png" />
     <Image Include="assets\textures\gameplay_level_atlas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Headers\BattleCityManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
