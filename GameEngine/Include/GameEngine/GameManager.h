@@ -4,6 +4,7 @@
 
 #include "GameEngine/RenderSystem.h"
 #include "GameplayUtilities/ScoreManager.h"
+#include "GameEngine/DataLoader.h"
 
 namespace GameEngine
 {
@@ -23,7 +24,7 @@ namespace GameEngine
 		class GAMEENGINE_API GameManager
 		{
 		public:
-			void InitializeSystems(GameData& game_data);
+			void InitializeSystems(GameData& game_data, GameEngine::DataUtils::DataLoader& data_loader);
 			void RunGameLoop();
 			void CleanUpSystems();
 		private:

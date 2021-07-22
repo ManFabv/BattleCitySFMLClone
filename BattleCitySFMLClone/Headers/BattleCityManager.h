@@ -2,8 +2,6 @@
 
 #include "GameEngine/GameManager.h"
 
-using namespace GameEngine::GameManagerMain;
-
 namespace BattleCitySFMLClone
 {
 	namespace Managers
@@ -18,8 +16,8 @@ namespace BattleCitySFMLClone
 			void StartGameLoop();
 			void CleanGameResources();
 
-			void InitializeGameData(GameData& game_data);
-			GameManager m_game_manager;
+			void InitializeGameData(GameEngine::GameManagerMain::GameData& game_data);
+			GameEngine::GameManagerMain::GameManager m_game_manager;
 		};
 	}
 }

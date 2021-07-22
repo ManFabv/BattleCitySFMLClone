@@ -1,6 +1,8 @@
 #include "BattleCityManager.h"
 
 using namespace BattleCitySFMLClone::Managers;
+using namespace GameEngine::GameManagerMain;
+using namespace GameEngine::DataUtils;
 
 BattleCitySFMLClone::Managers::BattleCityManager::~BattleCityManager()
 {
@@ -18,7 +20,8 @@ void BattleCityManager::InitializeGame()
 	GameData game_data;
 	InitializeGameData(game_data);
 
-	m_game_manager.InitializeSystems(game_data);
+	DataLoader data_loader;
+	m_game_manager.InitializeSystems(game_data, data_loader);
 }
 
 void BattleCitySFMLClone::Managers::BattleCityManager::StartGameLoop()

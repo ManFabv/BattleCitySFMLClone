@@ -15,8 +15,9 @@ using namespace GameplayUtilities::Scores;
 using namespace GameEngine::Systems;
 using namespace GameEngine::Components;
 using namespace GameplayUtilities::IO;
+using namespace GameEngine::DataUtils;
 
-void GameManager::InitializeSystems(GameData& game_data)
+void GameManager::InitializeSystems(GameData& game_data, DataLoader& data_loader)
 {
 	std::string player_anim_file = game_data.config_root_folder;
 	player_anim_file += "\\";
