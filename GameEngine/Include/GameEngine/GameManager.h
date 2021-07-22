@@ -23,6 +23,8 @@ namespace GameEngine
 			void UpdateEntities();
 			void DrawEntities();
 
+			void LoadDrawableEntity(GameEngine::DataUtils::AssetLoader& asset_loader, const std::string& root_folder, const std::string& config_folder, const std::string& file_name);
+
 			entt::registry m_registry;
 			sf::Event m_event;
 			sf::RenderWindow* m_window;
