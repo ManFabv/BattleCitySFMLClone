@@ -20,7 +20,6 @@ namespace GameplayUtilities
 			void OpenForWrite(const std::string& filepath);
 			void Write(const std::string& inputValue);
 			const std::string Read();
-			const char* ReadAsCString();
 			const bool IsOpen();
 			void Close();
 		private:

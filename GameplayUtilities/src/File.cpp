@@ -52,11 +52,6 @@ const std::string File::Read()
 	return valueToReturn;
 }
 
-const char* File::ReadAsCString()
-{
-	return Read().c_str();
-}
-
 const bool File::IsOpen()
 {
 	return file.is_open();

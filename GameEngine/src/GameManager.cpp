@@ -3,6 +3,13 @@
 #include "GameplayUtilities/File.h"
 #include <rapidjson/document.h>
 
+
+
+
+#include <iostream>
+
+
+
 using namespace GameEngine::GameManagerMain;
 using namespace GameplayUtilities::Scores;
 using namespace GameEngine::Systems;
@@ -11,12 +18,14 @@ using namespace GameplayUtilities::IO;
 
 void GameManager::InitializeSystems(const int resX, const int resY, const char* window_title, const char* config_folder)
 {
-	File file_reader;
 	std::string player_anim_file = config_folder;
+	player_anim_file += "\\animations\\player_anim.json";
+	File file_reader;
 	file_reader.OpenForRead(player_anim_file);
 	rapidjson::Document json_document;
-	json_document.Parse(file_reader.ReadAsCString());
-
+	json_document.Parse(file_reader.Read().c_str());
+	if(json_document.HasMember("sprites_width"))
+		std::cout << "HAS MEMBER";
 	m_window = new sf::RenderWindow(sf::VideoMode(resX, resY), window_title);
 
 	m_render_system = new RenderSystem(*m_window);
