@@ -35,7 +35,7 @@ void GameManager::RunGameLoop()
 	}
 }
 
-void GameEngine::GameManagerMain::GameManager::CleanUpSystems()
+void GameManager::CleanUpSystems()
 {
 	m_registry.clear();
 
@@ -43,7 +43,7 @@ void GameEngine::GameManagerMain::GameManager::CleanUpSystems()
 	delete m_render_system;
 }
 
-void GameEngine::GameManagerMain::GameManager::TakePlayerInput()
+void GameManager::TakePlayerInput()
 {
 	while (m_window->pollEvent(m_event))
 	{
@@ -52,12 +52,12 @@ void GameEngine::GameManagerMain::GameManager::TakePlayerInput()
 	}
 }
 
-void GameEngine::GameManagerMain::GameManager::UpdateEntities()
+void GameManager::UpdateEntities()
 {
 	//TODO: implement
 }
 
-void GameEngine::GameManagerMain::GameManager::DrawEntities()
+void GameManager::DrawEntities()
 {
 	m_window->clear();
 
@@ -66,13 +66,12 @@ void GameEngine::GameManagerMain::GameManager::DrawEntities()
 	m_window->display();
 }
 
-void GameEngine::GameManagerMain::GameManager::LoadDrawableEntity(GameEngine::DataUtils::AssetLoader& asset_loader, const std::string& root_folder, const std::string& config_folder, const std::string& file_name)
+void GameManager::LoadDrawableEntity(AssetLoader& asset_loader, const std::string& root_folder, const std::string& config_folder, const std::string& file_name)
 {
 	entt::entity entity = m_registry.create();
 
-	asset_loader.LoadTexture(entity, root_folder, config_folder, file_name);
 	sf::Sprite* m_player_sprite = new sf::Sprite();
-	m_player_sprite->setTexture(asset_loader.GetTexture(entity));
+	m_player_sprite->setTexture(asset_loader.GetAsset(file_name));
 
 	m_registry.emplace<DrawableComponent>(entity, *m_player_sprite);
 }

@@ -1,4 +1,5 @@
 #include "BattleCityManager.h"
+#include <SFML/Graphics.hpp>
 
 using namespace BattleCitySFMLClone::Managers;
 using namespace GameEngine::DataUtils;
@@ -21,7 +22,7 @@ void BattleCityManager::InitializeGame()
 	InitializeGameData(game_data);
 
 	ConfigLoader data_loader;
-	AssetLoader asset_loader;
+	AssetLoader asset_loader(game_data.config_root_folder, game_data.textures_folder);
 	m_game_manager.InitializeSystems(game_data, data_loader, asset_loader);
 }
 

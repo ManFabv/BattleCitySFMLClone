@@ -3,23 +3,40 @@
 
 using namespace GameEngine::DataUtils;
 
-GameEngine::DataUtils::AssetLoader::~AssetLoader()
+AssetLoader::AssetLoader(const std::string& root_folder, const std::string& config_folder)
 {
-	//for (auto texture : m_textures)
-	//	delete texture->second;
-
-	m_textures.clear();
+	ChangeLookupPath(root_folder, config_folder);
 }
 
-void GameEngine::DataUtils::AssetLoader::LoadTexture(const entt::entity entity_id, const std::string& root_folder, const std::string& config_folder, const std::string& file_name)
+AssetLoader::~AssetLoader()
 {
-	sf::Texture *texture = new sf::Texture();
-	std::string texture_name = FilePathHelper::GeneratePath(root_folder, config_folder, file_name);
-	texture->loadFromFile(texture_name);
-	m_textures.insert(std::pair(entity_id, texture));
+	m_assets.clear();
 }
 
-const sf::Texture& GameEngine::DataUtils::AssetLoader::GetTexture(const entt::entity entity_id)
+void AssetLoader::ChangeLookupPath(const std::string& root_folder, const std::string& config_folder)
 {
-	return *m_textures[entity_id];
+	m_root_folder = root_folder;
+	m_config_folder = config_folder;
+}
+
+const sf::Texture& AssetLoader::GetAsset(const std::string& asset_name)
+{
+	std::map<std::string, sf::Texture*>::iterator asset_found = m_assets.find(asset_name);
+
+	if (asset_found != m_assets.end())
+	{
+		return (*asset_found->second);
+	}
+	else
+	{
+		sf::Texture* asset = new sf::Texture();
+		asset->loadFromFile(GetLookupPath(asset_name));
+		m_assets[asset_name] = asset;
+		return *asset;
+	}
+}
+
+const std::string AssetLoader::GetLookupPath(const std::string& asset_name)
+{
+	return FilePathHelper::GeneratePath(m_root_folder, m_config_folder, asset_name);
 }
