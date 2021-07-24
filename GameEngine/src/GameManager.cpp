@@ -71,7 +71,7 @@ void GameManager::LoadDrawableEntity(AssetLoader& asset_loader, const std::strin
 	entt::entity entity = m_registry.create();
 
 	sf::Sprite* m_player_sprite = new sf::Sprite();
-	m_player_sprite->setTexture(asset_loader.GetAsset(file_name));
+	m_player_sprite->setTexture(asset_loader.GetTexture(file_name));
 
 	m_registry.emplace<DrawableComponent>(entity, *m_player_sprite);
 }

@@ -16,6 +16,8 @@ namespace GameEngine
 			std::string config_root_folder;
 			std::string animations_folder;
 			std::string textures_folder;
+			std::string fonts_folder;
+			std::string sounds_folder;
 			std::string player_config;
 		};
 	}

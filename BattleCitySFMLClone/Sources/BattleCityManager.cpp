@@ -1,5 +1,4 @@
 #include "BattleCityManager.h"
-#include <SFML/Graphics.hpp>
 
 using namespace BattleCitySFMLClone::Managers;
 using namespace GameEngine::DataUtils;
@@ -22,7 +21,7 @@ void BattleCityManager::InitializeGame()
 	InitializeGameData(game_data);
 
 	ConfigLoader data_loader;
-	AssetLoader asset_loader(game_data.config_root_folder, game_data.textures_folder);
+	AssetLoader asset_loader(game_data.config_root_folder, game_data.textures_folder, game_data.fonts_folder, game_data.sounds_folder);
 	m_game_manager.InitializeSystems(game_data, data_loader, asset_loader);
 }
 
@@ -45,4 +44,6 @@ void BattleCityManager::InitializeGameData(GameData& game_data)
 	game_data.animations_folder = "animations";
 	game_data.player_config = "player_anim.json";
 	game_data.textures_folder = "textures";
+	game_data.fonts_folder = "fonts";
+	game_data.sounds_folder = "audio";
 }
