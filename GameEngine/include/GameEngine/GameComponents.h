@@ -29,7 +29,11 @@ namespace GameEngine
 		struct GAMEENGINE_API AnimationComponent
 		{
 		public:
-			sf::IntRect m_current_subrect;
+			int m_current_frame = 0;
+			float m_elapsed_time = 0;
+			float m_duration = 0;
+			bool m_loop = false;
+			std::vector<sf::IntRect> m_frames;
 		};
 
 		struct GAMEENGINE_API DrawableComponent

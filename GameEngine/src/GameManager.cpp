@@ -32,13 +32,7 @@ void GameManager::InitializeSystems(const GameData& game_data, ConfigLoader& con
 	player_anim_data.frame_time = player_json_document["frame_time"].GetFloat();
 	player_anim_data.initial_animation = player_json_document["initial_animation"].GetString();
 	player_anim_data.animations_loop = player_json_document["animations_loop"].GetBool();
-	//TODO: below: this should be loaded from config
-	Animation* anim = new Animation();
-	anim->name = "idle_top";
-	anim->loop = false;
-	anim->frames.push_back(0);
-	player_anim_data.animations.push_back(anim);
-	//TODO: above: this should be loaded from config
+	//TODO: player_json_document["animations"] should be loaded from config
 	LoadAnimationInformationForEntity(player_entity, player_anim_data);
 	
 	m_window = new sf::RenderWindow(sf::VideoMode(game_data.resX, game_data.resY), game_data.window_title);
@@ -50,6 +44,7 @@ void GameManager::RunGameLoop()
 {
 	sf::Clock game_clock;
 	sf::Time delta_time;
+	m_is_paused = false;
 
 	while (m_window->isOpen())
 	{
@@ -126,6 +121,7 @@ entt::entity GameManager::LoadDrawableEntity(AssetLoader& asset_loader, const st
 
 	sf::Sprite* m_player_sprite = new sf::Sprite();
 	m_player_sprite->setTexture(asset_loader.GetTexture(file_name));
+	m_player_sprite->setScale(sf::Vector2f(m_player_sprite->getScale().x * world_scale.x, m_player_sprite->getScale().y * world_scale.y));
 
 	m_registry.emplace<DrawableComponent>(entity, *m_player_sprite);
 
@@ -134,13 +130,10 @@ entt::entity GameManager::LoadDrawableEntity(AssetLoader& asset_loader, const st
 
 void GameManager::LoadAnimationInformationForEntity(entt::entity entity, const AnimationData& anim_data)
 {
-	int anim_row = anim_data.row_index;
-
-	auto& drawable = m_registry.get<DrawableComponent>(entity);
-	sf::Sprite& sprite = *drawable.m_sprite;
-	sprite.setTextureRect(sf::IntRect(0, 0, 16, 16));
-	sf::Vector2f new_scale;
-	new_scale.x = sprite.getScale().x * world_scale.x;
-	new_scale.y = sprite.getScale().y * world_scale.y;
-	sprite.setScale(new_scale);
+	AnimationComponent* anim_component = new AnimationComponent();
+	anim_component->m_frames.push_back(sf::IntRect(0, 0, 16, 16));
+	anim_component->m_frames.push_back(sf::IntRect(16, 0, 16, 16));
+	anim_component->m_loop = true;
+	anim_component->m_duration = 0.2f;
+	m_registry.emplace<AnimationComponent>(entity, *anim_component);
 }
