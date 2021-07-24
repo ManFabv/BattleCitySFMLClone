@@ -35,7 +35,9 @@ void GameManager::RunGameLoop()
 		delta_time = game_clock.restart();
 		TakePlayerInput();
 		UpdateEntities(delta_time.asMilliseconds());
+		UpdateGUI();
 		DrawEntities();
+		DrawGUI();
 	}
 }
 
@@ -47,6 +49,11 @@ void GameManager::CleanUpSystems()
 	delete m_render_system;
 }
 
+void GameManager::PauseGame(bool pause)
+{
+	m_is_paused = pause;
+}
+
 void GameManager::TakePlayerInput()
 {
 	while (m_window->pollEvent(m_event))
@@ -54,11 +61,19 @@ void GameManager::TakePlayerInput()
 		if (m_event.type == sf::Event::Closed)
 			m_window->close();
 	}
+
+	if (m_is_paused)
+		return;
+
+	//TODO: add input below
 }
 
 void GameManager::UpdateEntities(float dt)
 {
-	//TODO: implement
+	if (m_is_paused)
+		return;
+
+	//TODO: implement below
 }
 
 void GameManager::DrawEntities()
@@ -68,6 +83,16 @@ void GameManager::DrawEntities()
 	m_render_system->Execute(m_registry);
 
 	m_window->display();
+}
+
+void GameManager::UpdateGUI()
+{
+	//TODO: implement 
+}
+
+void GameManager::DrawGUI()
+{
+	//TODO: implement 
 }
 
 void GameManager::LoadDrawableEntity(AssetLoader& asset_loader, const std::string& root_folder, const std::string& config_folder, const std::string& file_name)
