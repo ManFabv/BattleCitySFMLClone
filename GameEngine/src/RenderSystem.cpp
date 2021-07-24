@@ -3,7 +3,7 @@
 using namespace GameEngine::Systems;
 using namespace GameEngine::Components;
 
-void GameEngine::Systems::RenderSystem::Execute(entt::registry& scene_registry)
+void RenderSystem::Execute(entt::registry& scene_registry)
 {
 	auto render_view = scene_registry.view<DrawableComponent>();
 

@@ -29,13 +29,16 @@
     <ClInclude Include="include\GameEngine\ConfigLoader.h">
       <Filter>Include\GameEngine</Filter>
     </ClInclude>
-    <ClInclude Include="include\GameEngine\GameData.h">
-      <Filter>Include\GameEngine</Filter>
-    </ClInclude>
     <ClInclude Include="include\GameEngine\AssetLoader.h">
       <Filter>Include\GameEngine</Filter>
     </ClInclude>
     <ClInclude Include="include\GameEngine\FilePathHelper.h">
+      <Filter>Include\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameEngine\AnimationSystem.h">
+      <Filter>Include\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameEngine\GameData.h">
       <Filter>Include\GameEngine</Filter>
     </ClInclude>
   </ItemGroup>
@@ -53,6 +56,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\FilePathHelper.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AnimationSystem.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

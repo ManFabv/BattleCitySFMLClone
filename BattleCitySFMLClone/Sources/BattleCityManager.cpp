@@ -4,7 +4,7 @@ using namespace BattleCitySFMLClone::Managers;
 using namespace GameEngine::DataUtils;
 using namespace GameEngine::GameDataConfig;
 
-BattleCitySFMLClone::Managers::BattleCityManager::~BattleCityManager()
+BattleCityManager::~BattleCityManager()
 {
 	CleanGameResources();
 }
@@ -39,6 +39,7 @@ void BattleCityManager::InitializeGameData(GameData& game_data)
 {
 	game_data.resX = 800;
 	game_data.resY = 800;
+	game_data.world_scale = 5;
 	game_data.window_title = "Battle City SFML Clone";
 	game_data.config_root_folder = "assets";
 	game_data.animations_folder = "animations";

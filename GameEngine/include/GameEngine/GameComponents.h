@@ -26,13 +26,18 @@ namespace GameEngine
 			sf::FloatRect m_fixture;
 		};
 
+		struct GAMEENGINE_API AnimationComponent
+		{
+		public:
+			sf::IntRect m_current_subrect;
+		};
+
 		struct GAMEENGINE_API DrawableComponent
 		{
 		public:
-			DrawableComponent(sf::Drawable& drawable) : m_drawable(&drawable) {}
-			operator const sf::Drawable& () const { return *m_drawable; }
-		protected:
-			sf::Drawable* m_drawable;
+			DrawableComponent(sf::Sprite& drawable) : m_sprite(&drawable) {}
+			operator const sf::Drawable& () const { return *m_sprite; }
+			sf::Sprite* m_sprite;
 		};
 	}
 }

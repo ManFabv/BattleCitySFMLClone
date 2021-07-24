@@ -3,6 +3,7 @@
 #include "GameEngineExportDefine.h"
 
 #include "GameEngine/RenderSystem.h"
+#include "GameEngine/AnimationSystem.h"
 #include "GameplayUtilities/ScoreManager.h"
 #include "GameEngine/ConfigLoader.h"
 #include "GameEngine/GameData.h"
@@ -26,13 +27,16 @@ namespace GameEngine
 			void UpdateGUI();
 			void DrawGUI();
 
-			void LoadDrawableEntity(GameEngine::DataUtils::AssetLoader& asset_loader, const std::string& root_folder, const std::string& config_folder, const std::string& file_name);
+			entt::entity LoadDrawableEntity(GameEngine::DataUtils::AssetLoader& asset_loader, const std::string& file_name);
+			void LoadAnimationInformationForEntity(entt::entity entity, const GameEngine::GameDataConfig::AnimationData& anim_data);
 
 			entt::registry m_registry;
 			sf::Event m_event;
 			sf::RenderWindow* m_window;
 			GameEngine::Systems::RenderSystem* m_render_system;
+			GameEngine::Systems::AnimationSystem* m_anim_system;
 			GameplayUtilities::Scores::ScoreManager m_score_manager;
+			sf::Vector2f world_scale;
 			bool m_is_paused;
 		};
 	}

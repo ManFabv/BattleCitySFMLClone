@@ -6,6 +6,8 @@
   "frame_time": 0.2,
   "anim_row": 0,
   "atlas_name": "gameplay_entities_atlas.png",
+  "initial_animation": "idle_top",
+  "animations_loop": true,
   "animations": {
     "idle_left": [ 2 ],
     "move_left": [ 2, 3 ],
@@ -15,6 +17,5 @@
     "move_top": [ 0, 1 ],
     "idle_bottom": [ 4 ],
     "move_bottom": [ 4, 5 ]
-  },
-  "atlas_name": "gameplay_entities_atlas.png"
+  }
 }
