@@ -3,6 +3,7 @@
 #include "GameEngineExportDefine.h"
 
 #include "GameEngine/RenderSystem.h"
+#include "GameEngine/RenderGUISystem.h"
 #include "GameEngine/AnimationSystem.h"
 #include "GameEngine/MovementSystem.h"
 #include "GameplayUtilities/ScoreManager.h"
@@ -25,17 +26,17 @@ namespace GameEngine
 			void TakePlayerInput();
 			void UpdateEntities(float dt);
 			void DrawEntities();
-			void UpdateGUI();
-			void DrawGUI();
 
-			entt::entity LoadDrawableEntity(GameEngine::DataUtils::AssetLoader& asset_loader, const std::string& file_name);
+			void LoadDrawableEntity(entt::entity entity, GameEngine::DataUtils::AssetLoader& asset_loader, const std::string& file_name);
 			void LoadAnimationInformationForEntity(entt::entity entity, const GameEngine::GameDataConfig::AnimationData& anim_data);
 			void LoadMovementForEntity(entt::entity entity);
+			void LoadGameFont(entt::entity entity, GameEngine::DataUtils::AssetLoader& asset_loader, const std::string& file_name);
 
 			entt::registry m_registry;
 			sf::Event m_event;
 			sf::RenderWindow* m_window;
 			GameEngine::Systems::RenderSystem* m_render_system;
+			GameEngine::Systems::RenderGUISystem* m_rendergui_system;
 			GameEngine::Systems::AnimationSystem* m_anim_system;
 			GameEngine::Systems::MovementSystem* m_movement_system;
 			GameplayUtilities::Scores::ScoreManager m_score_manager;

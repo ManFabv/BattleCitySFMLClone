@@ -44,5 +44,14 @@ namespace GameEngine
 			
 			sf::Sprite* m_sprite;
 		};
+
+		struct GAMEENGINE_API DrawableFontComponent
+		{
+		public:
+			DrawableFontComponent(sf::Text& drawable) : m_font(&drawable) {}
+			operator const sf::Drawable& () const { return *m_font; }
+
+			sf::Text* m_font;
+		};
 	}
 }

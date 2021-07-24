@@ -21,8 +21,8 @@ void GameManager::InitializeSystems(const GameData& game_data, ConfigLoader& con
 	player_json_document.Parse(player_json.c_str());
 
 	std::string player_atlas_name = player_json_document["atlas_name"].GetString();
-	entt::entity player_entity = LoadDrawableEntity(asset_loader, player_atlas_name);
-
+	entt::entity player_entity = m_registry.create(); 
+	
 	AnimationData player_anim_data;
 	player_anim_data.row_index = player_json_document["anim_row"].GetInt();
 	player_anim_data.horizontal_sprites = player_json_document["horizontal_sprites"].GetInt();
@@ -33,12 +33,17 @@ void GameManager::InitializeSystems(const GameData& game_data, ConfigLoader& con
 	player_anim_data.initial_animation = player_json_document["initial_animation"].GetString();
 	player_anim_data.animations_loop = player_json_document["animations_loop"].GetBool();
 	//TODO: player_json_document["animations"] should be loaded from config
+	LoadDrawableEntity(player_entity, asset_loader, player_atlas_name);
 	LoadAnimationInformationForEntity(player_entity, player_anim_data);
 	LoadMovementForEntity(player_entity);
+
+	entt::entity gamefont_entity = m_registry.create();
+	LoadGameFont(gamefont_entity, asset_loader, game_data.font_name);
 	
 	m_window = new sf::RenderWindow(sf::VideoMode(game_data.resX, game_data.resY), game_data.window_title);
 
 	m_render_system = new RenderSystem(*m_window);
+	m_rendergui_system = new RenderGUISystem(*m_window);
 	m_anim_system = new AnimationSystem();
 	m_movement_system = new MovementSystem();
 }
@@ -51,12 +56,10 @@ void GameManager::RunGameLoop()
 
 	while (m_window->isOpen())
 	{
-		delta_time = game_clock.restart();
 		TakePlayerInput();
 		UpdateEntities(delta_time.asMilliseconds());
-		UpdateGUI();
 		DrawEntities();
-		DrawGUI();
+		delta_time = game_clock.restart();
 	}
 }
 
@@ -68,6 +71,7 @@ void GameManager::CleanUpSystems()
 	delete m_render_system;
 	delete m_anim_system;
 	delete m_movement_system;
+	delete m_rendergui_system;
 }
 
 void GameManager::PauseGame(bool pause)
@@ -108,30 +112,18 @@ void GameManager::DrawEntities()
 
 	m_render_system->Execute(m_registry);
 
+	m_rendergui_system->Execute(m_registry);
+
 	m_window->display();
 }
 
-void GameManager::UpdateGUI()
+void GameManager::LoadDrawableEntity(entt::entity entity, AssetLoader& asset_loader, const std::string& file_name)
 {
-	//TODO: implement 
-}
-
-void GameManager::DrawGUI()
-{
-	//TODO: implement 
-}
-
-entt::entity GameManager::LoadDrawableEntity(AssetLoader& asset_loader, const std::string& file_name)
-{
-	entt::entity entity = m_registry.create();
-
 	sf::Sprite* m_player_sprite = new sf::Sprite();
 	m_player_sprite->setTexture(asset_loader.GetTexture(file_name));
 	m_player_sprite->setScale(sf::Vector2f(m_player_sprite->getScale().x * world_scale.x, m_player_sprite->getScale().y * world_scale.y));
-	m_player_sprite->setPosition(160, 704); //TODO: player should be at the spawn point position
+	m_player_sprite->setPosition(160, 736); //TODO: player should be at the spawn point position
 	m_registry.emplace<DrawableComponent>(entity, *m_player_sprite);
-
-	return entity;
 }
 
 void GameManager::LoadAnimationInformationForEntity(entt::entity entity, const AnimationData& anim_data)
@@ -149,4 +141,15 @@ void GameManager::LoadMovementForEntity(entt::entity entity)
 	MovementComponent* movement_component = new MovementComponent();
 	movement_component->m_velocity = sf::Vector2f(0, -1); //TODO: velocity should be taken from player config file
 	m_registry.emplace<MovementComponent>(entity, *movement_component);
+}
+
+void GameManager::LoadGameFont(entt::entity entity, AssetLoader& asset_loader, const std::string& file_name)
+{
+	sf::Text* m_player_font = new sf::Text();
+	m_player_font->setFont(asset_loader.GetFont(file_name));
+	m_player_font->setString("Score: 0000");
+	m_player_font->setFillColor(sf::Color::White); //TODO: style should be loaded from config file
+	m_player_font->setCharacterSize(24); //TODO: style should be loaded from config file
+	m_player_font->setPosition(336, 8); //TODO: score should be at the top center
+	m_registry.emplace<DrawableFontComponent>(entity, *m_player_font);
 }

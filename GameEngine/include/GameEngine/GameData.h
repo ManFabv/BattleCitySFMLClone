@@ -20,6 +20,7 @@ namespace GameEngine
 			std::string fonts_folder = "";
 			std::string sounds_folder = "";
 			std::string player_config = "";
+			std::string font_name = "";
 		};
 
 		struct GAMEENGINE_API Animation

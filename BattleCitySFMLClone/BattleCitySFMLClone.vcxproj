@@ -186,6 +186,9 @@
   <ItemGroup>
     <ClInclude Include="Headers\BattleCityManager.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Font Include="assets\fonts\EndlessBossBattleRegular-v7Ey.ttf" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

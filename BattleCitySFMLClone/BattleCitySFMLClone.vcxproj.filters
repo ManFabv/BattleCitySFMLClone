@@ -28,6 +28,9 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
+    <Filter Include="assets\fonts">
+      <UniqueIdentifier>{2bcc7d1c-cf30-4207-a627-a48bb5cf93fd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BattleCitySFMLClone.cpp">
@@ -89,5 +92,10 @@
     <ClInclude Include="Headers\BattleCityManager.h">
       <Filter>Headers</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="assets\fonts\EndlessBossBattleRegular-v7Ey.ttf">
+      <Filter>assets\fonts</Filter>
+    </Font>
   </ItemGroup>
 </Project>

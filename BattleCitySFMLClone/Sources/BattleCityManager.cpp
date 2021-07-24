@@ -39,7 +39,7 @@ void BattleCityManager::InitializeGameData(GameData& game_data)
 {
 	game_data.resX = 800;
 	game_data.resY = 800;
-	game_data.world_scale = 5;
+	game_data.world_scale = 4;
 	game_data.window_title = "Battle City SFML Clone";
 	game_data.config_root_folder = "assets";
 	game_data.animations_folder = "animations";
@@ -47,4 +47,5 @@ void BattleCityManager::InitializeGameData(GameData& game_data)
 	game_data.textures_folder = "textures";
 	game_data.fonts_folder = "fonts";
 	game_data.sounds_folder = "audio";
+	game_data.font_name = "EndlessBossBattleRegular-v7Ey.ttf";
 }
