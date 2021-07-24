@@ -17,7 +17,17 @@ namespace GameEngine
 		struct GAMEENGINE_API MovementComponent
 		{
 		public:
+			float max_velocity = 0;
 			sf::Vector2f m_velocity;
+		};
+
+		struct GAMEENGINE_API CustomPlayerInputComponent
+		{
+		public:
+			sf::Keyboard::Key move_left;
+			sf::Keyboard::Key move_right;
+			sf::Keyboard::Key move_up;
+			sf::Keyboard::Key move_down;
 		};
 
 		struct GAMEENGINE_API ColliderComponent

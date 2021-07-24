@@ -47,6 +47,9 @@
     <ClInclude Include="include\GameEngine\RenderGUISystem.h">
       <Filter>Include\GameEngine</Filter>
     </ClInclude>
+    <ClInclude Include="include\GameEngine\InputSystem.h">
+      <Filter>Include\GameEngine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GameManager.cpp">
@@ -71,6 +74,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\RenderGUISystem.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InputSystem.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

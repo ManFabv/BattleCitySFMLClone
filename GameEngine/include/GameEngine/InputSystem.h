@@ -9,13 +9,10 @@ namespace GameEngine
 {
 	namespace Systems
 	{
-		class GAMEENGINE_API RenderSystem
+		class GAMEENGINE_API InputSystem
 		{
 		public:
-			RenderSystem(sf::RenderWindow &current_window) : m_window(&current_window) {}
 			void Execute(entt::registry& scene_registry);
-		private:
-			sf::RenderWindow *m_window;
 		};
 	}
 }

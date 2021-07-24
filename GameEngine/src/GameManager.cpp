@@ -36,6 +36,7 @@ void GameManager::InitializeSystems(const GameData& game_data, ConfigLoader& con
 	LoadDrawableEntity(player_entity, asset_loader, player_atlas_name);
 	LoadAnimationInformationForEntity(player_entity, player_anim_data);
 	LoadMovementForEntity(player_entity);
+	AddPlayerInputComponent(player_entity);
 
 	entt::entity gamefont_entity = m_registry.create();
 	LoadGameFont(gamefont_entity, asset_loader, game_data.font_name);
@@ -46,6 +47,7 @@ void GameManager::InitializeSystems(const GameData& game_data, ConfigLoader& con
 	m_rendergui_system = new RenderGUISystem(*m_window);
 	m_anim_system = new AnimationSystem();
 	m_movement_system = new MovementSystem();
+	m_input_system = new InputSystem();
 }
 
 void GameManager::RunGameLoop()
@@ -72,11 +74,17 @@ void GameManager::CleanUpSystems()
 	delete m_anim_system;
 	delete m_movement_system;
 	delete m_rendergui_system;
+	delete m_input_system;
 }
 
 void GameManager::PauseGame(bool pause)
 {
 	m_is_paused = pause;
+}
+
+void GameManager::CustomPlayerInput()
+{
+	m_input_system->Execute(m_registry);
 }
 
 void GameManager::TakePlayerInput()
@@ -94,6 +102,7 @@ void GameManager::TakePlayerInput()
 		return;
 
 	//TODO: add input below
+	CustomPlayerInput();
 }
 
 void GameManager::UpdateEntities(float dt)
@@ -139,7 +148,8 @@ void GameManager::LoadAnimationInformationForEntity(entt::entity entity, const A
 void GameManager::LoadMovementForEntity(entt::entity entity)
 {
 	MovementComponent* movement_component = new MovementComponent();
-	movement_component->m_velocity = sf::Vector2f(0, -1); //TODO: velocity should be taken from player config file
+	movement_component->max_velocity = 1; //TODO: this should be taken from config
+	movement_component->m_velocity = sf::Vector2f(0, 0);
 	m_registry.emplace<MovementComponent>(entity, *movement_component);
 }
 
@@ -152,4 +162,14 @@ void GameManager::LoadGameFont(entt::entity entity, AssetLoader& asset_loader, c
 	m_player_font->setCharacterSize(24); //TODO: style should be loaded from config file
 	m_player_font->setPosition(336, 8); //TODO: score should be at the top center
 	m_registry.emplace<DrawableFontComponent>(entity, *m_player_font);
+}
+
+void GameManager::AddPlayerInputComponent(entt::entity entity)
+{
+	CustomPlayerInputComponent* custom_player_input_component = new CustomPlayerInputComponent();
+	custom_player_input_component->move_left = sf::Keyboard::Left;
+	custom_player_input_component->move_right = sf::Keyboard::Right;
+	custom_player_input_component->move_up = sf::Keyboard::Up;
+	custom_player_input_component->move_down = sf::Keyboard::Down;
+	m_registry.emplace<CustomPlayerInputComponent>(entity, *custom_player_input_component);
 }
