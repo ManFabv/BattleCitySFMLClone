@@ -42,6 +42,7 @@ void GameManager::InitializeSystems(const GameData& game_data, ConfigLoader& con
 	LoadGameFont(gamefont_entity, asset_loader, game_data.font_name);
 	
 	m_window = new sf::RenderWindow(sf::VideoMode(game_data.resX, game_data.resY), game_data.window_title);
+	m_window->setVerticalSyncEnabled(true);
 
 	m_render_system = new RenderSystem(*m_window);
 	m_rendergui_system = new RenderGUISystem(*m_window);
@@ -58,10 +59,10 @@ void GameManager::RunGameLoop()
 
 	while (m_window->isOpen())
 	{
-		TakePlayerInput();
-		UpdateEntities(delta_time.asMilliseconds());
-		DrawEntities();
 		delta_time = game_clock.restart();
+		TakePlayerInput();
+		UpdateEntities(delta_time.asSeconds());
+		DrawEntities();
 	}
 }
 
@@ -133,6 +134,9 @@ void GameManager::LoadDrawableEntity(entt::entity entity, AssetLoader& asset_loa
 	m_player_sprite->setScale(sf::Vector2f(m_player_sprite->getScale().x * world_scale.x, m_player_sprite->getScale().y * world_scale.y));
 	m_player_sprite->setPosition(160, 736); //TODO: player should be at the spawn point position
 	m_registry.emplace<DrawableComponent>(entity, *m_player_sprite);
+
+	TransformComponent* transform = new TransformComponent(*m_player_sprite);
+	m_registry.emplace<TransformComponent>(entity, *transform);
 }
 
 void GameManager::LoadAnimationInformationForEntity(entt::entity entity, const AnimationData& anim_data)
@@ -141,14 +145,14 @@ void GameManager::LoadAnimationInformationForEntity(entt::entity entity, const A
 	anim_component->m_frames.push_back(sf::IntRect(0, 0, 16, 16));
 	anim_component->m_frames.push_back(sf::IntRect(16, 0, 16, 16));
 	anim_component->m_loop = true;
-	anim_component->m_duration = 0.2f;
+	anim_component->m_duration = 0.1f;
 	m_registry.emplace<AnimationComponent>(entity, *anim_component);
 }
 
 void GameManager::LoadMovementForEntity(entt::entity entity)
 {
 	MovementComponent* movement_component = new MovementComponent();
-	movement_component->max_velocity = 1; //TODO: this should be taken from config
+	movement_component->max_velocity = 1.5f; //TODO: this should be taken from config
 	movement_component->m_velocity = sf::Vector2f(0, 0);
 	m_registry.emplace<MovementComponent>(entity, *movement_component);
 }

@@ -16,6 +16,7 @@ void AnimationSystem::Execute(entt::registry& scene_registry, float dt)
 			anim.m_current_frame++;
 			if (anim.m_current_frame >= anim.m_frames.size())
 			{
+				anim.m_elapsed_time = 0;
 				if (anim.m_loop)
 					anim.m_current_frame = 0;
 				else

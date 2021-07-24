@@ -11,7 +11,10 @@ namespace GameEngine
 		struct GAMEENGINE_API TransformComponent
 		{
 		public:
-			sf::Vector2f m_position;
+			TransformComponent(sf::Transformable& transform) : m_transform(&transform) {}
+			operator sf::Transformable& () const { return *m_transform; }
+
+			sf::Transformable* m_transform;
 		};
 
 		struct GAMEENGINE_API MovementComponent
