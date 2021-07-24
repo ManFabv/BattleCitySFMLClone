@@ -20,7 +20,7 @@ namespace GameEngine
 			void CleanUpSystems();
 		private:
 			void TakePlayerInput();
-			void UpdateEntities();
+			void UpdateEntities(float dt);
 			void DrawEntities();
 
 			void LoadDrawableEntity(GameEngine::DataUtils::AssetLoader& asset_loader, const std::string& root_folder, const std::string& config_folder, const std::string& file_name);

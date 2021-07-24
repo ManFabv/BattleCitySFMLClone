@@ -27,10 +27,14 @@ void GameManager::InitializeSystems(const GameData& game_data, ConfigLoader& con
 
 void GameManager::RunGameLoop()
 {
+	sf::Clock game_clock;
+	sf::Time delta_time;
+
 	while (m_window->isOpen())
 	{
+		delta_time = game_clock.restart();
 		TakePlayerInput();
-		UpdateEntities();
+		UpdateEntities(delta_time.asMilliseconds());
 		DrawEntities();
 	}
 }
@@ -52,7 +56,7 @@ void GameManager::TakePlayerInput()
 	}
 }
 
-void GameManager::UpdateEntities()
+void GameManager::UpdateEntities(float dt)
 {
 	//TODO: implement
 }
