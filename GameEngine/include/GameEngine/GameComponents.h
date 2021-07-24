@@ -41,6 +41,7 @@ namespace GameEngine
 		public:
 			DrawableComponent(sf::Sprite& drawable) : m_sprite(&drawable) {}
 			operator const sf::Drawable& () const { return *m_sprite; }
+			
 			sf::Sprite* m_sprite;
 		};
 	}

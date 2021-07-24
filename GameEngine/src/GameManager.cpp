@@ -34,10 +34,13 @@ void GameManager::InitializeSystems(const GameData& game_data, ConfigLoader& con
 	player_anim_data.animations_loop = player_json_document["animations_loop"].GetBool();
 	//TODO: player_json_document["animations"] should be loaded from config
 	LoadAnimationInformationForEntity(player_entity, player_anim_data);
+	LoadMovementForEntity(player_entity);
 	
 	m_window = new sf::RenderWindow(sf::VideoMode(game_data.resX, game_data.resY), game_data.window_title);
 
 	m_render_system = new RenderSystem(*m_window);
+	m_anim_system = new AnimationSystem();
+	m_movement_system = new MovementSystem();
 }
 
 void GameManager::RunGameLoop()
@@ -63,6 +66,8 @@ void GameManager::CleanUpSystems()
 
 	delete m_window;
 	delete m_render_system;
+	delete m_anim_system;
+	delete m_movement_system;
 }
 
 void GameManager::PauseGame(bool pause)
@@ -94,6 +99,7 @@ void GameManager::UpdateEntities(float dt)
 
 	//TODO: implement below
 	m_anim_system->Execute(m_registry, dt);
+	m_movement_system->Execute(m_registry, dt);
 }
 
 void GameManager::DrawEntities()
@@ -122,7 +128,7 @@ entt::entity GameManager::LoadDrawableEntity(AssetLoader& asset_loader, const st
 	sf::Sprite* m_player_sprite = new sf::Sprite();
 	m_player_sprite->setTexture(asset_loader.GetTexture(file_name));
 	m_player_sprite->setScale(sf::Vector2f(m_player_sprite->getScale().x * world_scale.x, m_player_sprite->getScale().y * world_scale.y));
-
+	m_player_sprite->setPosition(160, 704); //TODO: player should be at the spawn point position
 	m_registry.emplace<DrawableComponent>(entity, *m_player_sprite);
 
 	return entity;
@@ -136,4 +142,11 @@ void GameManager::LoadAnimationInformationForEntity(entt::entity entity, const A
 	anim_component->m_loop = true;
 	anim_component->m_duration = 0.2f;
 	m_registry.emplace<AnimationComponent>(entity, *anim_component);
+}
+
+void GameManager::LoadMovementForEntity(entt::entity entity)
+{
+	MovementComponent* movement_component = new MovementComponent();
+	movement_component->m_velocity = sf::Vector2f(0, -1); //TODO: velocity should be taken from player config file
+	m_registry.emplace<MovementComponent>(entity, *movement_component);
 }
