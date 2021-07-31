@@ -34,6 +34,7 @@
     <ClInclude Include="include\GameEngine\GameManager.h" />
     <ClInclude Include="include\GameEngine\InputSystem.h" />
     <ClInclude Include="include\GameEngine\MovementSystem.h" />
+    <ClInclude Include="include\GameEngine\PlayerAnimatorControllerSystem.h" />
     <ClInclude Include="include\GameEngine\RenderGUISystem.h" />
     <ClInclude Include="include\GameEngine\RenderSystem.h" />
   </ItemGroup>
@@ -45,6 +46,7 @@
     <ClCompile Include="src\GameManager.cpp" />
     <ClCompile Include="src\InputSystem.cpp" />
     <ClCompile Include="src\MovementSystem.cpp" />
+    <ClCompile Include="src\PlayerAnimatorControllerSystem.cpp" />
     <ClCompile Include="src\RenderGUISystem.cpp" />
     <ClCompile Include="src\RenderSystem.cpp" />
   </ItemGroup>

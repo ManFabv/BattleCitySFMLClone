@@ -6,6 +6,7 @@
 #include "GameEngine/RenderGUISystem.h"
 #include "GameEngine/AnimationSystem.h"
 #include "GameEngine/MovementSystem.h"
+#include "GameEngine/PlayerAnimatorControllerSystem.h"
 #include "GameEngine/InputSystem.h"
 #include "GameplayUtilities/ScoreManager.h"
 #include "GameEngine/ConfigLoader.h"
@@ -42,6 +43,7 @@ namespace GameEngine
 			GameEngine::Systems::RenderGUISystem* m_rendergui_system;
 			GameEngine::Systems::AnimationSystem* m_anim_system;
 			GameEngine::Systems::MovementSystem* m_movement_system;
+			GameEngine::Systems::PlayerAnimatorControllerSystem* m_playeranimatorcontroller_system;
 			GameEngine::Systems::InputSystem* m_input_system;
 			GameplayUtilities::Scores::ScoreManager m_score_manager;
 			sf::Vector2f world_scale;

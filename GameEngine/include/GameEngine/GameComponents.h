@@ -31,6 +31,10 @@ namespace GameEngine
 			sf::Keyboard::Key move_right;
 			sf::Keyboard::Key move_up;
 			sf::Keyboard::Key move_down;
+			bool pressed_move_left;
+			bool pressed_move_right;
+			bool pressed_move_up;
+			bool pressed_move_down;
 		};
 
 		struct GAMEENGINE_API ColliderComponent
@@ -46,7 +50,27 @@ namespace GameEngine
 			float m_elapsed_time = 0;
 			float m_duration = 0;
 			bool m_loop = false;
+			enum PLAYER_ANIMATION_TYPE animation_type;
 			std::vector<sf::IntRect> m_frames;
+		};
+
+		enum GAMEENGINE_API PLAYER_ANIMATION_TYPE
+		{
+			IDLE_UP,
+			IDLE_DOWN,
+			IDLE_LEFT,
+			IDLE_RIGHT,
+			MOVE_LEFT,
+			MOVE_RIGHT,
+			MOVE_UP,
+			MOVE_DOWN
+		};
+
+		struct GAMEENGINE_API PlayerAnimationControllerComponent
+		{
+		public:
+			AnimationComponent* current_animation;
+			std::map<PLAYER_ANIMATION_TYPE, AnimationComponent> animations;
 		};
 
 		struct GAMEENGINE_API DrawableComponent

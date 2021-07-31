@@ -49,6 +49,7 @@ void GameManager::InitializeSystems(const GameData& game_data, ConfigLoader& con
 	m_anim_system = new AnimationSystem();
 	m_movement_system = new MovementSystem();
 	m_input_system = new InputSystem();
+	m_playeranimatorcontroller_system = new PlayerAnimatorControllerSystem();
 }
 
 void GameManager::RunGameLoop()
@@ -76,6 +77,7 @@ void GameManager::CleanUpSystems()
 	delete m_movement_system;
 	delete m_rendergui_system;
 	delete m_input_system;
+	delete m_playeranimatorcontroller_system;
 }
 
 void GameManager::PauseGame(bool pause)
@@ -112,6 +114,7 @@ void GameManager::UpdateEntities(float dt)
 		return;
 
 	//TODO: implement below
+	m_playeranimatorcontroller_system->Execute(m_registry, dt);
 	m_anim_system->Execute(m_registry, dt);
 	m_movement_system->Execute(m_registry, dt);
 }
@@ -141,12 +144,61 @@ void GameManager::LoadDrawableEntity(entt::entity entity, AssetLoader& asset_loa
 
 void GameManager::LoadAnimationInformationForEntity(entt::entity entity, const AnimationData& anim_data)
 {
-	AnimationComponent* anim_component = new AnimationComponent();
-	anim_component->m_frames.push_back(sf::IntRect(0, 0, 16, 16));
-	anim_component->m_frames.push_back(sf::IntRect(16, 0, 16, 16));
-	anim_component->m_loop = true;
-	anim_component->m_duration = 0.1f;
-	m_registry.emplace<AnimationComponent>(entity, *anim_component);
+	AnimationComponent* anim_component_idle_up = new AnimationComponent();
+	anim_component_idle_up->m_frames.push_back(sf::IntRect(0, 0, 16, 16));
+	anim_component_idle_up->m_loop = true;
+	anim_component_idle_up->m_duration = 0.075f;
+	anim_component_idle_up->animation_type = PLAYER_ANIMATION_TYPE::IDLE_UP;
+	AnimationComponent* anim_component_idle_down = new AnimationComponent();
+	anim_component_idle_down->m_frames.push_back(sf::IntRect(64, 0, 16, 16));
+	anim_component_idle_down->m_loop = true;
+	anim_component_idle_down->m_duration = 0.075f;
+	anim_component_idle_down->animation_type = PLAYER_ANIMATION_TYPE::IDLE_DOWN;
+	AnimationComponent* anim_component_idle_left = new AnimationComponent();
+	anim_component_idle_left->m_frames.push_back(sf::IntRect(32, 0, 16, 16));
+	anim_component_idle_left->m_loop = true;
+	anim_component_idle_left->m_duration = 0.075f;
+	anim_component_idle_left->animation_type = PLAYER_ANIMATION_TYPE::IDLE_LEFT;
+	AnimationComponent* anim_component_idle_right = new AnimationComponent();
+	anim_component_idle_right->m_frames.push_back(sf::IntRect(96, 0, 16, 16));
+	anim_component_idle_right->m_loop = true;
+	anim_component_idle_right->m_duration = 0.075f;
+	anim_component_idle_right->animation_type = PLAYER_ANIMATION_TYPE::IDLE_RIGHT;
+	AnimationComponent* anim_component_move_up = new AnimationComponent();
+	anim_component_move_up->m_frames.push_back(sf::IntRect(0, 0, 16, 16));
+	anim_component_move_up->m_frames.push_back(sf::IntRect(16, 0, 16, 16));
+	anim_component_move_up->m_loop = true;
+	anim_component_move_up->m_duration = 0.075f;
+	anim_component_move_up->animation_type = PLAYER_ANIMATION_TYPE::MOVE_UP;
+	AnimationComponent* anim_component_move_down = new AnimationComponent();
+	anim_component_move_down->m_frames.push_back(sf::IntRect(64, 0, 16, 16));
+	anim_component_move_down->m_frames.push_back(sf::IntRect(80, 0, 16, 16));
+	anim_component_move_down->m_loop = true;
+	anim_component_move_down->m_duration = 0.075f;
+	anim_component_move_down->animation_type = PLAYER_ANIMATION_TYPE::MOVE_DOWN;
+	AnimationComponent* anim_component_move_left = new AnimationComponent();
+	anim_component_move_left->m_frames.push_back(sf::IntRect(32, 0, 16, 16));
+	anim_component_move_left->m_frames.push_back(sf::IntRect(48, 0, 16, 16));
+	anim_component_move_left->m_loop = true;
+	anim_component_move_left->m_duration = 0.075f;
+	anim_component_move_left->animation_type = PLAYER_ANIMATION_TYPE::MOVE_LEFT;
+	AnimationComponent* anim_component_move_right = new AnimationComponent();
+	anim_component_move_right->m_frames.push_back(sf::IntRect(96, 0, 16, 16));
+	anim_component_move_right->m_frames.push_back(sf::IntRect(112, 0, 16, 16));
+	anim_component_move_right->m_loop = true;
+	anim_component_move_right->m_duration = 0.075f;
+	anim_component_move_right->animation_type = PLAYER_ANIMATION_TYPE::MOVE_RIGHT;
+	PlayerAnimationControllerComponent* animation_controller_component = new PlayerAnimationControllerComponent();
+	animation_controller_component->animations.insert(std::make_pair(anim_component_idle_up->animation_type, *anim_component_idle_up));
+	animation_controller_component->animations.insert(std::make_pair(anim_component_idle_down->animation_type, *anim_component_idle_down));
+	animation_controller_component->animations.insert(std::make_pair(anim_component_idle_left->animation_type, *anim_component_idle_left));
+	animation_controller_component->animations.insert(std::make_pair(anim_component_idle_right->animation_type, *anim_component_idle_right));
+	animation_controller_component->animations.insert(std::make_pair(anim_component_move_up->animation_type, *anim_component_move_up));
+	animation_controller_component->animations.insert(std::make_pair(anim_component_move_down->animation_type, *anim_component_move_down));
+	animation_controller_component->animations.insert(std::make_pair(anim_component_move_left->animation_type, *anim_component_move_left));
+	animation_controller_component->animations.insert(std::make_pair(anim_component_move_right->animation_type, *anim_component_move_right));
+	animation_controller_component->current_animation = anim_component_idle_up;
+	m_registry.emplace<PlayerAnimationControllerComponent>(entity, *animation_controller_component);
 }
 
 void GameManager::LoadMovementForEntity(entt::entity entity)
