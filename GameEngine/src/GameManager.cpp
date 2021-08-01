@@ -54,6 +54,7 @@ void GameManager::InitializeSystems(const GameData& game_data, ConfigLoader& con
 	m_movement_system = new MovementSystem();
 	m_input_system = new InputSystem();
 	m_playeranimatorcontroller_system = new PlayerAnimatorControllerSystem();
+	m_dynamic_collider_system = new DynamicColliderSystem(40); //TODO: this should be loaded from config
 }
 
 void GameManager::RunGameLoop()
@@ -67,6 +68,7 @@ void GameManager::RunGameLoop()
 		delta_time = game_clock.restart();
 		TakePlayerInput();
 		UpdateEntities(delta_time.asSeconds());
+		UpdatePhysics();
 		DrawEntities();
 	}
 }
@@ -82,6 +84,7 @@ void GameManager::CleanUpSystems()
 	delete m_rendergui_system;
 	delete m_input_system;
 	delete m_playeranimatorcontroller_system;
+	delete m_dynamic_collider_system;
 }
 
 void GameManager::PauseGame(bool pause)
@@ -123,6 +126,11 @@ void GameManager::UpdateEntities(float dt)
 	m_movement_system->Execute(m_registry, dt);
 }
 
+void GameManager::UpdatePhysics()
+{
+	m_dynamic_collider_system->Execute(m_registry);
+}
+
 void GameManager::DrawEntities()
 {
 	m_window->clear();
@@ -144,6 +152,9 @@ void GameManager::LoadDrawableEntity(entt::entity entity, AssetLoader& asset_loa
 
 	TransformComponent* transform = new TransformComponent(*m_player_sprite);
 	m_registry.emplace<TransformComponent>(entity, *transform);
+
+	DynamicColliderComponent* dynamic_collider_component = new DynamicColliderComponent(*m_player_sprite);
+	m_registry.emplace<DynamicColliderComponent>(entity, *dynamic_collider_component);
 }
 
 void GameManager::LoadAnimationInformationForEntity(entt::entity entity, const AnimationData& anim_data)
@@ -278,5 +289,10 @@ void GameManager::CreateTileAndAddComponents(GameEngine::DataUtils::AssetLoader&
 
 	sprite->setPosition(position);
 	sprite->setTextureRect(texture_rect);
+	
 	m_registry.emplace<DrawableComponent>(entity, *sprite);
+
+	StaticColliderComponent* rigid_collider_component = new StaticColliderComponent();
+	rigid_collider_component->m_fixture = sprite->getGlobalBounds();
+	m_registry.emplace<StaticColliderComponent>(entity, *rigid_collider_component);
 }

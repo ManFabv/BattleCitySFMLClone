@@ -37,21 +37,19 @@ namespace GameEngine
 			bool pressed_move_down;
 		};
 
-		struct GAMEENGINE_API ColliderComponent
+		struct GAMEENGINE_API StaticColliderComponent
 		{
 		public:
 			sf::FloatRect m_fixture;
 		};
 
-		struct GAMEENGINE_API AnimationComponent
+		struct GAMEENGINE_API DynamicColliderComponent
 		{
 		public:
-			int m_current_frame = 0;
-			float m_elapsed_time = 0;
-			float m_duration = 0;
-			bool m_loop = false;
-			enum PLAYER_ANIMATION_TYPE animation_type;
-			std::vector<sf::IntRect> m_frames;
+			DynamicColliderComponent(sf::Sprite& drawable) : m_sprite(&drawable) {}
+			const sf::FloatRect GetBoundingBox() const { return m_sprite->getGlobalBounds(); };
+		private:
+			sf::Sprite* m_sprite;
 		};
 
 		enum GAMEENGINE_API PLAYER_ANIMATION_TYPE
@@ -64,6 +62,17 @@ namespace GameEngine
 			MOVE_RIGHT,
 			MOVE_UP,
 			MOVE_DOWN
+		};
+
+		struct GAMEENGINE_API AnimationComponent
+		{
+		public:
+			int m_current_frame = 0;
+			float m_elapsed_time = 0;
+			float m_duration = 0;
+			bool m_loop = false;
+			enum PLAYER_ANIMATION_TYPE animation_type;
+			std::vector<sf::IntRect> m_frames;
 		};
 
 		struct GAMEENGINE_API PlayerAnimationControllerComponent

@@ -8,6 +8,7 @@
 #include "GameEngine/MovementSystem.h"
 #include "GameEngine/PlayerAnimatorControllerSystem.h"
 #include "GameEngine/InputSystem.h"
+#include "GameEngine/DynamicColliderSystem.h"
 #include "GameplayUtilities/ScoreManager.h"
 #include "GameEngine/ConfigLoader.h"
 #include "GameEngine/GameData.h"
@@ -28,6 +29,7 @@ namespace GameEngine
 			virtual void CustomPlayerInput();
 			void TakePlayerInput();
 			void UpdateEntities(float dt);
+			void UpdatePhysics();
 			void DrawEntities();
 
 			void LoadDrawableEntity(entt::entity entity, GameEngine::DataUtils::AssetLoader& asset_loader, const std::string& file_name);
@@ -47,6 +49,7 @@ namespace GameEngine
 			GameEngine::Systems::MovementSystem* m_movement_system;
 			GameEngine::Systems::PlayerAnimatorControllerSystem* m_playeranimatorcontroller_system;
 			GameEngine::Systems::InputSystem* m_input_system;
+			GameEngine::Systems::DynamicColliderSystem* m_dynamic_collider_system;
 			GameplayUtilities::Scores::ScoreManager m_score_manager;
 			sf::Vector2f world_scale;
 			bool m_is_paused;
