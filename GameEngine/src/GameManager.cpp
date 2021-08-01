@@ -2,6 +2,7 @@
 #include "GameEngine/GameComponents.h"
 #include "GameEngine/AssetLoader.h"
 #include <rapidjson/document.h>
+#include "GameEngine/FilePathHelper.h"
 
 using namespace GameEngine::GameManagerMain;
 using namespace GameplayUtilities::Scores;
@@ -40,6 +41,9 @@ void GameManager::InitializeSystems(const GameData& game_data, ConfigLoader& con
 
 	entt::entity gamefont_entity = m_registry.create();
 	LoadGameFont(gamefont_entity, asset_loader, game_data.font_name);
+
+	std::string level_json = config_loader.LoadDataFrom(game_data.config_root_folder, game_data.gameplay_levels_folder_name, game_data.gameplay_level_name);
+	LoadLevel(asset_loader, level_json);
 	
 	m_window = new sf::RenderWindow(sf::VideoMode(game_data.resX, game_data.resY), game_data.window_title);
 	m_window->setVerticalSyncEnabled(true);
@@ -135,7 +139,7 @@ void GameManager::LoadDrawableEntity(entt::entity entity, AssetLoader& asset_loa
 	sf::Sprite* m_player_sprite = new sf::Sprite();
 	m_player_sprite->setTexture(asset_loader.GetTexture(file_name));
 	m_player_sprite->setScale(sf::Vector2f(m_player_sprite->getScale().x * world_scale.x, m_player_sprite->getScale().y * world_scale.y));
-	m_player_sprite->setPosition(160, 736); //TODO: player should be at the spawn point position
+	m_player_sprite->setPosition(80, 798); //TODO: player should be at the spawn point position
 	m_registry.emplace<DrawableComponent>(entity, *m_player_sprite);
 
 	TransformComponent* transform = new TransformComponent(*m_player_sprite);
@@ -228,4 +232,51 @@ void GameManager::AddPlayerInputComponent(entt::entity entity)
 	custom_player_input_component->move_up = sf::Keyboard::Up;
 	custom_player_input_component->move_down = sf::Keyboard::Down;
 	m_registry.emplace<CustomPlayerInputComponent>(entity, *custom_player_input_component);
+}
+
+void GameManager::LoadLevel(GameEngine::DataUtils::AssetLoader& asset_loader, const std::string& level_json)
+{
+	rapidjson::Document level_json_document;
+	level_json_document.Parse(level_json.c_str());
+
+	int tilewidth = level_json_document["tilewidth"].GetInt();
+	int tileheight = level_json_document["tileheight"].GetInt();
+	int mapwidth = level_json_document["mapwidth"].GetInt();
+	int mapheight = level_json_document["mapheight"].GetInt();
+	int atlassize = level_json_document["atlassize"].GetInt();
+	int mapsize = level_json_document["mapsize"].GetInt();
+	const std::string atlas_name = level_json_document["atlasname"].GetString();
+	auto data = level_json_document["data"].GetArray();
+	auto data_iterator = data.Begin();
+
+	for (int position_in_array = 0; data_iterator != data.End(); data_iterator++, position_in_array++)
+	{
+		CreateTileAndAddComponents(asset_loader, atlassize, mapsize, tilewidth, tileheight, data_iterator->GetInt(), position_in_array, atlas_name);
+	}
+}
+
+void GameManager::CreateTileAndAddComponents(GameEngine::DataUtils::AssetLoader& asset_loader, int atlas_size, int map_size, int tilewidth, int tileheight, int tiletype, int position_in_array, const std::string& atlas_name)
+{
+	if (tiletype == 0)
+		return;
+
+	sf::Sprite* sprite = new sf::Sprite();
+	entt::entity entity = m_registry.create();
+	sprite->setTexture(asset_loader.GetTexture(atlas_name));
+	sprite->setScale(sf::Vector2f(sprite->getScale().x * world_scale.x, sprite->getScale().y * world_scale.y));
+
+	int pos_in_array_x = (position_in_array % map_size);
+	int pos_in_array_y = (position_in_array / map_size);
+	sf::Vector2f position;
+	position.x = pos_in_array_x * tilewidth * world_scale.x;
+	position.y = pos_in_array_y * tileheight * world_scale.y;
+	int pos_in_atlas_x = ((tiletype - 1) % atlas_size);
+	int pos_in_atlas_y = ((tiletype - 1) / atlas_size);
+	int subrectx = pos_in_atlas_x * tilewidth;
+	int subrecty = pos_in_atlas_y * tileheight;
+	sf::IntRect texture_rect(subrectx, subrecty, tilewidth, tileheight);
+
+	sprite->setPosition(position);
+	sprite->setTextureRect(texture_rect);
+	m_registry.emplace<DrawableComponent>(entity, *sprite);
 }

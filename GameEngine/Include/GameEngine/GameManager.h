@@ -35,6 +35,8 @@ namespace GameEngine
 			void LoadMovementForEntity(entt::entity entity);
 			void LoadGameFont(entt::entity entity, GameEngine::DataUtils::AssetLoader& asset_loader, const std::string& file_name);
 			void AddPlayerInputComponent(entt::entity entity);
+			void LoadLevel(GameEngine::DataUtils::AssetLoader& asset_loader, const std::string& level_json);
+			void CreateTileAndAddComponents(GameEngine::DataUtils::AssetLoader& asset_loader, int atlas_size, int map_size, int tilewidth, int tileheight, int tiletype, int position_in_array, const std::string& atlas_name);
 
 			entt::registry m_registry;
 			sf::Event m_event;

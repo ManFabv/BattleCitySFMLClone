@@ -21,6 +21,8 @@ namespace GameEngine
 			std::string sounds_folder = "";
 			std::string player_config = "";
 			std::string font_name = "";
+			std::string gameplay_level_name = "";
+			std::string gameplay_levels_folder_name = "";
 		};
 
 		struct GAMEENGINE_API Animation

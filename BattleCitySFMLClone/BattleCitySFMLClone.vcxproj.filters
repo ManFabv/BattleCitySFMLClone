@@ -31,6 +31,9 @@
     <Filter Include="assets\fonts">
       <UniqueIdentifier>{2bcc7d1c-cf30-4207-a627-a48bb5cf93fd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="assets\levels\level_001">
+      <UniqueIdentifier>{8dd39a19-a40b-4f76-80b0-455cb4fdbd1b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BattleCitySFMLClone.cpp">
@@ -67,17 +70,14 @@
     </Media>
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\levels\Level_001.json">
-      <Filter>assets\levels</Filter>
-    </None>
-    <None Include="assets\levels\Level_002.json">
-      <Filter>assets\levels</Filter>
-    </None>
     <None Include="assets\animations\enemy_anim.json">
       <Filter>assets\animations</Filter>
     </None>
     <None Include="assets\animations\player_anim.json">
       <Filter>assets\animations</Filter>
+    </None>
+    <None Include="assets\levels\level_001\Level_001.json">
+      <Filter>assets\levels\level_001</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
