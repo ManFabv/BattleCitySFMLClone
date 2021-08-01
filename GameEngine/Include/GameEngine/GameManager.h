@@ -52,6 +52,7 @@ namespace GameEngine
 			GameEngine::Systems::DynamicColliderSystem* m_dynamic_collider_system;
 			GameplayUtilities::Scores::ScoreManager m_score_manager;
 			sf::Vector2f world_scale;
+			sf::Vector2f entities_scale;
 			bool m_is_paused;
 		};
 	}

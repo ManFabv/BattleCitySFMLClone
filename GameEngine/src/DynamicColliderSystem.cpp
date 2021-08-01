@@ -22,14 +22,25 @@ void DynamicColliderSystem::Execute(entt::registry& scene_registry)
 			sf::FloatRect intersection;
 			if (dynamic_fixture.intersects(static_collider.m_fixture, intersection))
 			{
-				if ( std::abs(intersection.width) > m_ignore_collision_threshold || std::abs(intersection.height) > m_ignore_collision_threshold)
+				float movex = 0;
+				float movey = 0;
+				if (dynamic_movement.m_velocity.x > 0)
 				{
-					float movex = -intersection.width;
-					float movey = -intersection.height;
-					if (dynamic_movement.m_velocity.x == 0) movex = 0;
-					if (dynamic_movement.m_velocity.y == 0) movey = 0;
-					dynamic_tranform.m_transform->move(movex, movey);
+					movex = -intersection.width;
 				}
+				else if (dynamic_movement.m_velocity.x < 0)
+				{
+					movex = intersection.width;
+				}
+				else if (dynamic_movement.m_velocity.y > 0)
+				{
+					movey = -intersection.height;
+				}
+				else if (dynamic_movement.m_velocity.y < 0)
+				{
+					movey = intersection.height;
+				}
+				dynamic_tranform.m_transform->move(movex, movey);
 			}
 		}
 	}

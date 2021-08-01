@@ -2,7 +2,6 @@
 #include "GameEngine/GameComponents.h"
 #include "GameEngine/AssetLoader.h"
 #include <rapidjson/document.h>
-#include "GameEngine/FilePathHelper.h"
 
 using namespace GameEngine::GameManagerMain;
 using namespace GameplayUtilities::Scores;
@@ -15,6 +14,8 @@ void GameManager::InitializeSystems(const GameData& game_data, ConfigLoader& con
 {
 	world_scale.x = game_data.world_scale;
 	world_scale.y = game_data.world_scale;
+	entities_scale.x = game_data.entities_scale;
+	entities_scale.y = game_data.entities_scale;
 
 	std::string player_json = config_loader.LoadDataFrom(game_data.config_root_folder, game_data.animations_folder, game_data.player_config);
 	
@@ -54,7 +55,7 @@ void GameManager::InitializeSystems(const GameData& game_data, ConfigLoader& con
 	m_movement_system = new MovementSystem();
 	m_input_system = new InputSystem();
 	m_playeranimatorcontroller_system = new PlayerAnimatorControllerSystem();
-	m_dynamic_collider_system = new DynamicColliderSystem(40); //TODO: this should be loaded from config
+	m_dynamic_collider_system = new DynamicColliderSystem();
 }
 
 void GameManager::RunGameLoop()
@@ -146,8 +147,8 @@ void GameManager::LoadDrawableEntity(entt::entity entity, AssetLoader& asset_loa
 {
 	sf::Sprite* m_player_sprite = new sf::Sprite();
 	m_player_sprite->setTexture(asset_loader.GetTexture(file_name));
-	m_player_sprite->setScale(sf::Vector2f(m_player_sprite->getScale().x * world_scale.x, m_player_sprite->getScale().y * world_scale.y));
-	m_player_sprite->setPosition(80, 798); //TODO: player should be at the spawn point position
+	m_player_sprite->setScale(sf::Vector2f(m_player_sprite->getScale().x * entities_scale.x, m_player_sprite->getScale().y * entities_scale.y));
+	m_player_sprite->setPosition(72, 814); //TODO: player should be at the spawn point position
 	m_registry.emplace<DrawableComponent>(entity, *m_player_sprite);
 
 	TransformComponent* transform = new TransformComponent(*m_player_sprite);

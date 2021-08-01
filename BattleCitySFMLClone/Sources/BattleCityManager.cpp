@@ -40,6 +40,7 @@ void BattleCityManager::InitializeGameData(GameData& game_data)
 	game_data.resX = 880;
 	game_data.resY = 880;
 	game_data.world_scale = 5;
+	game_data.entities_scale = 4;
 	game_data.window_title = "Battle City SFML Clone";
 	game_data.config_root_folder = "assets";
 	game_data.animations_folder = "animations";
