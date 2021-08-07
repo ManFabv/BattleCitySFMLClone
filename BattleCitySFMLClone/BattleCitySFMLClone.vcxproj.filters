@@ -34,6 +34,9 @@
     <Filter Include="assets\levels\level_001">
       <UniqueIdentifier>{8dd39a19-a40b-4f76-80b0-455cb4fdbd1b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="assets\levels\level_002">
+      <UniqueIdentifier>{87d8029f-eaba-4d54-a678-a85127813694}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BattleCitySFMLClone.cpp">
@@ -78,6 +81,9 @@
     </None>
     <None Include="assets\levels\level_001\Level_001.json">
       <Filter>assets\levels\level_001</Filter>
+    </None>
+    <None Include="assets\levels\level_002\Level_002.json">
+      <Filter>assets\levels\level_002</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

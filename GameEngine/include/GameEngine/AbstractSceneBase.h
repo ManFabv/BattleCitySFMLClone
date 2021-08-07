@@ -21,10 +21,11 @@ namespace GameEngine
 		class GAMEENGINE_API AbstractSceneBase
 		{
 		public:
-			virtual void InitializeSystems(const GameEngine::GameDataConfig::GameData& game_data, GameEngine::DataUtils::ConfigLoader& config_loader, GameEngine::DataUtils::AssetLoader& asset_loader) = 0;
+			virtual void InitializeSystems(const GameEngine::GameDataConfig::GameData& game_data, GameEngine::DataUtils::ConfigLoader& config_loader, GameEngine::DataUtils::AssetLoader& asset_loader);
 			void RunGameLoop();
 			virtual void CleanUpSystems();
 			void PauseGame(bool pause);
+
 		protected:
 			virtual void CustomPlayerInput() = 0;
 			void TakePlayerInput();
@@ -45,6 +46,10 @@ namespace GameEngine
 			GameEngine::Systems::InputSystem* m_input_system;
 			GameEngine::Systems::DynamicColliderSystem* m_dynamic_collider_system;
 			bool m_is_paused;
+
+		private:
+			void SetupCommonSystems(int resX, int resY, const std::string& window_title);
+			void CleanupCommonSystems();
 		};
 	}
 }

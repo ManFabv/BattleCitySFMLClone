@@ -1,4 +1,6 @@
 #include "BattleCityManager.h"
+#include "GameEngine/SceneGamePlay.h"
+#include "GameEngine/SceneMainMenu.h"
 
 using namespace BattleCitySFMLClone::Managers;
 using namespace GameEngine::DataUtils;
@@ -24,9 +26,11 @@ void BattleCityManager::InitializeGame()
 	ConfigLoader data_loader;
 	AssetLoader asset_loader(game_data.config_root_folder, game_data.textures_folder, game_data.fonts_folder, game_data.sounds_folder);
 	
+	SceneMainMenu* main_menu_scene = new SceneMainMenu();
 	SceneGamePlay* gameplay_scene = new SceneGamePlay();
 
 	m_game_manager.InitializeSystems(game_data, data_loader, asset_loader, gameplay_scene);
+	m_game_manager.AddScene(gameplay_scene);
 }
 
 void BattleCitySFMLClone::Managers::BattleCityManager::StartGameLoop()

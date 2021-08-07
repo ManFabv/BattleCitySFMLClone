@@ -177,6 +177,7 @@
     <None Include="assets\animations\enemy_anim.json" />
     <None Include="assets\animations\player_anim.json" />
     <None Include="assets\levels\level_001\Level_001.json" />
+    <None Include="assets\levels\level_002\Level_002.json" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\textures\gameplay_entities_atlas.png" />

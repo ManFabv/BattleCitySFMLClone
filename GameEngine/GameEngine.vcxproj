@@ -40,6 +40,7 @@
     <ClInclude Include="include\GameEngine\RenderGUISystem.h" />
     <ClInclude Include="include\GameEngine\RenderSystem.h" />
     <ClInclude Include="include\GameEngine\SceneGamePlay.h" />
+    <ClInclude Include="include\GameEngine\SceneMainMenu.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AbstractSceneBase.cpp" />
@@ -55,6 +56,7 @@
     <ClCompile Include="src\RenderGUISystem.cpp" />
     <ClCompile Include="src\RenderSystem.cpp" />
     <ClCompile Include="src\SceneGamePlay.cpp" />
+    <ClCompile Include="src\SceneMainMenu.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

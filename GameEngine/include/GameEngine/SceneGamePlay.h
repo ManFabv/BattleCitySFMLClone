@@ -34,7 +34,6 @@ namespace GameEngine
 			sf::Vector2f entities_scale;
 			sf::Text* m_player_score_font;
 			std::string m_user_name;
-			bool m_is_paused;
 		};
 	}
 }

@@ -1,6 +1,12 @@
 #include "GameEngine/AbstractSceneBase.h"
 
 using namespace GameEngine::Scenes;
+using namespace GameEngine::Systems;
+
+void AbstractSceneBase::InitializeSystems(const GameEngine::GameDataConfig::GameData& game_data, GameEngine::DataUtils::ConfigLoader& config_loader, GameEngine::DataUtils::AssetLoader& asset_loader)
+{
+	SetupCommonSystems(game_data.resX, game_data.resY, game_data.window_title);
+}
 
 void AbstractSceneBase::RunGameLoop()
 {
@@ -22,16 +28,7 @@ void AbstractSceneBase::RunGameLoop()
 
 void AbstractSceneBase::CleanUpSystems()
 {
-	m_registry.clear();
-
-	delete m_window;
-	delete m_render_system;
-	delete m_anim_system;
-	delete m_movement_system;
-	delete m_rendergui_system;
-	delete m_input_system;
-	delete m_playeranimatorcontroller_system;
-	delete m_dynamic_collider_system;
+	CleanupCommonSystems();
 }
 
 void AbstractSceneBase::PauseGame(bool pause)
@@ -82,4 +79,64 @@ void AbstractSceneBase::DrawEntities()
 	m_rendergui_system->Execute(m_registry);
 
 	m_window->display();
+}
+
+void AbstractSceneBase::SetupCommonSystems(int resX, int resY, const std::string& window_title)
+{
+	m_window = new sf::RenderWindow(sf::VideoMode(resX, resY), window_title);
+	m_window->setVerticalSyncEnabled(true);
+
+	m_render_system = new RenderSystem(*m_window);
+	m_rendergui_system = new RenderGUISystem(*m_window);
+	m_anim_system = new AnimationSystem();
+	m_movement_system = new MovementSystem();
+	m_input_system = new InputSystem();
+	m_playeranimatorcontroller_system = new PlayerAnimatorControllerSystem();
+	m_dynamic_collider_system = new DynamicColliderSystem();
+}
+
+void AbstractSceneBase::CleanupCommonSystems()
+{
+	m_registry.clear();
+
+	if(m_window != nullptr)
+	{
+		delete m_window;
+		m_window = nullptr;
+	}
+	if (m_render_system != nullptr)
+	{	
+		delete m_render_system;
+		m_render_system = nullptr;
+	}
+	if (m_anim_system != nullptr)
+	{	
+		delete m_anim_system;
+		m_anim_system = nullptr;
+	}
+	if (m_movement_system != nullptr)
+	{	
+		delete m_movement_system;
+		m_movement_system = nullptr;
+	}
+	if (m_rendergui_system != nullptr)
+	{	
+		delete m_rendergui_system;
+		m_rendergui_system = nullptr;
+	}
+	if (m_input_system != nullptr)
+	{	
+		delete m_input_system;
+		m_input_system = nullptr;
+	}
+	if (m_playeranimatorcontroller_system != nullptr)
+	{	
+		delete m_playeranimatorcontroller_system;
+		m_playeranimatorcontroller_system = nullptr;
+	}
+	if (m_dynamic_collider_system != nullptr)
+	{
+		delete m_dynamic_collider_system;
+		m_dynamic_collider_system = nullptr;
+	}
 }

@@ -62,6 +62,9 @@
     <ClInclude Include="include\GameEngine\SceneGamePlay.h">
       <Filter>Include\GameEngine</Filter>
     </ClInclude>
+    <ClInclude Include="include\GameEngine\SceneMainMenu.h">
+      <Filter>Include\GameEngine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GameManager.cpp">
@@ -101,6 +104,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\SceneGamePlay.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SceneMainMenu.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

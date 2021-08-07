@@ -10,6 +10,8 @@ using namespace GameEngine::Components;
 
 void SceneGamePlay::InitializeSystems(const GameData& game_data, ConfigLoader& config_loader, AssetLoader& asset_loader)
 {
+	AbstractSceneBase::InitializeSystems(game_data, config_loader, asset_loader);
+
 	world_scale.x = game_data.world_scale;
 	world_scale.y = game_data.world_scale;
 	entities_scale.x = game_data.entities_scale;
@@ -50,32 +52,17 @@ void SceneGamePlay::InitializeSystems(const GameData& game_data, ConfigLoader& c
 
 	entt::entity enemy_entity = m_registry.create();
 	LoadEnemyEntity(enemy_entity, asset_loader, entities_atlas_name, 8, 8);
-
-	m_window = new sf::RenderWindow(sf::VideoMode(game_data.resX, game_data.resY), game_data.window_title);
-	m_window->setVerticalSyncEnabled(true);
-
-	m_render_system = new RenderSystem(*m_window);
-	m_rendergui_system = new RenderGUISystem(*m_window);
-	m_anim_system = new AnimationSystem();
-	m_movement_system = new MovementSystem();
-	m_input_system = new InputSystem();
-	m_playeranimatorcontroller_system = new PlayerAnimatorControllerSystem();
-	m_dynamic_collider_system = new DynamicColliderSystem();
 }
 
 void SceneGamePlay::CleanUpSystems()
 {
-	m_registry.clear();
+	AbstractSceneBase::CleanUpSystems();
 
-	delete m_window;
-	delete m_render_system;
-	delete m_anim_system;
-	delete m_movement_system;
-	delete m_rendergui_system;
-	delete m_input_system;
-	delete m_playeranimatorcontroller_system;
-	delete m_dynamic_collider_system;
-	delete m_player_score_font;
+	if (m_player_score_font != nullptr)
+	{
+		delete m_player_score_font;
+		m_player_score_font = nullptr;
+	}
 }
 
 void SceneGamePlay::CustomPlayerInput()
