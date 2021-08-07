@@ -13,7 +13,7 @@ namespace GameEngine
 		{
 		public:
 			SceneMainMenu(std::function<void()> confirmation_delegate) :m_confirmation_delegate(confirmation_delegate) { }
-			virtual void InitializeSystems(const GameEngine::GameDataConfig::GameData& game_data, GameEngine::DataUtils::ConfigLoader& config_loader, GameEngine::DataUtils::AssetLoader& asset_loader) override;
+			virtual void InitializeSystems(const GameEngine::GameDataConfig::GameData& game_data, GameEngine::DataUtils::ConfigLoader& config_loader, GameEngine::DataUtils::AssetLoader& asset_loader, sf::RenderWindow* main_window) override;
 			virtual void CleanUpSystems() override;
 		private:
 			virtual void UpdateUI(float dt);

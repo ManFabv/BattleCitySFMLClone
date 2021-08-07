@@ -21,7 +21,9 @@ namespace GameEngine
 		class GAMEENGINE_API AbstractSceneBase
 		{
 		public:
-			virtual void InitializeSystems(const GameEngine::GameDataConfig::GameData& game_data, GameEngine::DataUtils::ConfigLoader& config_loader, GameEngine::DataUtils::AssetLoader& asset_loader);
+			virtual void InitializeSystems(const GameEngine::GameDataConfig::GameData& game_data, 
+				GameEngine::DataUtils::ConfigLoader& config_loader, GameEngine::DataUtils::AssetLoader& asset_loader, 
+				sf::RenderWindow* main_window);
 			void RunGameLoop();
 			void PauseGame(bool pause);
 			void PrepareCleanup();
@@ -52,7 +54,7 @@ namespace GameEngine
 			bool m_is_paused;
 
 		private:
-			void SetupCommonSystems(int resX, int resY, const std::string& window_title);
+			void SetupCommonSystems(sf::RenderWindow*main_window);
 			void CleanupCommonSystems();
 		};
 	}

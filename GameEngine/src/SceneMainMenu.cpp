@@ -6,9 +6,9 @@ using namespace GameEngine::Scenes;
 using namespace GameEngine::Components;
 using namespace GameEngine::Systems;
 
-void SceneMainMenu::InitializeSystems(const GameData& game_data, ConfigLoader& config_loader, AssetLoader& asset_loader)
+void SceneMainMenu::InitializeSystems(const GameData& game_data, ConfigLoader& config_loader, AssetLoader& asset_loader, sf::RenderWindow* main_window)
 {
-	AbstractSceneBase::InitializeSystems(game_data, config_loader, asset_loader);
+	AbstractSceneBase::InitializeSystems(game_data, config_loader, asset_loader, main_window);
 
 	entt::entity gamefont_title_entity = m_registry.create();
 	entt::entity gamefont_start_entity = m_registry.create();

@@ -6,6 +6,7 @@ using namespace BattleCitySFMLClone::Managers;
 using namespace GameEngine::DataUtils;
 using namespace GameEngine::GameDataConfig;
 using namespace GameEngine::Scenes;
+using namespace GameEngine::GameManagerMain;
 
 void BattleCityManager::Run()
 {
@@ -18,6 +19,8 @@ void BattleCityManager::InitializeGame()
 	current_scene_index = 0;
 	InitializeGameData();
 
+	m_game_manager = new GameManager();
+
 	m_data_loader = new ConfigLoader();
 	m_asset_loader = new AssetLoader(m_game_data.config_root_folder, m_game_data.textures_folder, m_game_data.fonts_folder, m_game_data.sounds_folder);
 	
@@ -27,19 +30,19 @@ void BattleCityManager::InitializeGame()
 	SceneGamePlay* gameplay_scene_1 = new SceneGamePlay("level_001\\Level_001.json");
 	SceneGamePlay* gameplay_scene_2 = new SceneGamePlay("level_002\\Level_002.json");
 
-	m_game_manager.InitializeSystems(&m_game_data, m_data_loader, m_asset_loader, main_menu_scene);
-	m_game_manager.AddScene(gameplay_scene_1);
-	m_game_manager.AddScene(gameplay_scene_2);
+	m_game_manager->InitializeSystems(&m_game_data, m_data_loader, m_asset_loader, main_menu_scene);
+	m_game_manager->AddScene(gameplay_scene_1);
+	m_game_manager->AddScene(gameplay_scene_2);
 }
 
 void BattleCityManager::StartGameLoop()
 {
-	m_game_manager.RunGameLoop();
+	m_game_manager->RunGameLoop();
 }
 
 void BattleCityManager::CleanGameResources()
 {
-	m_game_manager.CleanUpSystems();
+	m_game_manager->CleanUpSystems();
 
 	if (m_data_loader != nullptr)
 	{
@@ -51,12 +54,17 @@ void BattleCityManager::CleanGameResources()
 		delete m_asset_loader;
 		m_asset_loader = nullptr;
 	}
+	if (m_game_manager != nullptr)
+	{
+		delete m_game_manager;
+		m_game_manager = nullptr;
+	}
 }
 
 void BattleCityManager::LoadNextGameLevel()
 {
 	current_scene_index++;
-	m_game_manager.ChangeScene(current_scene_index);
+	m_game_manager->ChangeScene(current_scene_index);
 	StartGameLoop();
 }
 

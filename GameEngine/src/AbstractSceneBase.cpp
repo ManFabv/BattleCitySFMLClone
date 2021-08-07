@@ -3,9 +3,11 @@
 using namespace GameEngine::Scenes;
 using namespace GameEngine::Systems;
 
-void AbstractSceneBase::InitializeSystems(const GameEngine::GameDataConfig::GameData& game_data, GameEngine::DataUtils::ConfigLoader& config_loader, GameEngine::DataUtils::AssetLoader& asset_loader)
+void AbstractSceneBase::InitializeSystems(const GameEngine::GameDataConfig::GameData& game_data, 
+	GameEngine::DataUtils::ConfigLoader& config_loader, GameEngine::DataUtils::AssetLoader& asset_loader,
+	sf::RenderWindow* main_window)
 {
-	SetupCommonSystems(game_data.resX, game_data.resY, game_data.window_title);
+	SetupCommonSystems(main_window);
 }
 
 void AbstractSceneBase::RunGameLoop()
@@ -102,11 +104,10 @@ void AbstractSceneBase::CheckIfShouldCleanUp()
 	}
 }
 
-void AbstractSceneBase::SetupCommonSystems(int resX, int resY, const std::string& window_title)
+void AbstractSceneBase::SetupCommonSystems(sf::RenderWindow* main_window)
 {
 	m_prepare_cleanup = false;
-	m_window = new sf::RenderWindow(sf::VideoMode(resX, resY), window_title);
-	m_window->setVerticalSyncEnabled(true);
+	m_window = main_window;
 
 	m_render_system = new RenderSystem(*m_window);
 	m_rendergui_system = new RenderGUISystem(*m_window);
@@ -121,11 +122,8 @@ void AbstractSceneBase::CleanupCommonSystems()
 {
 	m_registry.clear();
 
-	if(m_window != nullptr)
-	{
-		delete m_window;
-		m_window = nullptr;
-	}
+	m_window = nullptr;
+
 	if (m_render_system != nullptr)
 	{	
 		delete m_render_system;

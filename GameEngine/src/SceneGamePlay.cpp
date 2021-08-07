@@ -8,9 +8,9 @@ using namespace GameEngine::Scenes;
 using namespace GameEngine::Systems;
 using namespace GameEngine::Components;
 
-void SceneGamePlay::InitializeSystems(const GameData& game_data, ConfigLoader& config_loader, AssetLoader& asset_loader)
+void SceneGamePlay::InitializeSystems(const GameData& game_data, ConfigLoader& config_loader, AssetLoader& asset_loader, sf::RenderWindow* main_window)
 {
-	AbstractSceneBase::InitializeSystems(game_data, config_loader, asset_loader);
+	AbstractSceneBase::InitializeSystems(game_data, config_loader, asset_loader, main_window);
 
 	world_scale.x = game_data.world_scale;
 	world_scale.y = game_data.world_scale;

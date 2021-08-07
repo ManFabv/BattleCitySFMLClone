@@ -30,6 +30,8 @@ namespace GameEngine
 			GameEngine::GameDataConfig::GameData* m_game_data;
 			GameEngine::DataUtils::ConfigLoader* m_config_loader;
 			GameEngine::DataUtils::AssetLoader* m_asset_loader;
+
+			sf::RenderWindow* m_window;
 		};
 	}
 }
