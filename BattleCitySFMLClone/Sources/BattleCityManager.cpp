@@ -7,11 +7,6 @@ using namespace GameEngine::DataUtils;
 using namespace GameEngine::GameDataConfig;
 using namespace GameEngine::Scenes;
 
-BattleCityManager::~BattleCityManager()
-{
-	CleanGameResources();
-}
-
 void BattleCityManager::Run()
 {
 	InitializeGame();
@@ -29,7 +24,7 @@ void BattleCityManager::InitializeGame()
 	SceneMainMenu* main_menu_scene = new SceneMainMenu();
 	SceneGamePlay* gameplay_scene = new SceneGamePlay();
 
-	m_game_manager.InitializeSystems(game_data, data_loader, asset_loader, gameplay_scene);
+	m_game_manager.InitializeSystems(game_data, data_loader, asset_loader, main_menu_scene);
 	m_game_manager.AddScene(gameplay_scene);
 }
 

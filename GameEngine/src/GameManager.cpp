@@ -9,11 +9,6 @@ GameManager::GameManager()
 	m_current_scene = nullptr;
 }
 
-GameManager::~GameManager()
-{
-	CleanUpSystems();
-}
-
 void GameManager::AddScene(GameEngine::Scenes::AbstractSceneBase* new_scene)
 {
 	m_scenes.push_back(new_scene);

@@ -9,7 +9,6 @@ namespace BattleCitySFMLClone
 		class BattleCityManager
 		{
 		public:
-			~BattleCityManager();
 			void Run();
 		private:
 			void InitializeGame();
