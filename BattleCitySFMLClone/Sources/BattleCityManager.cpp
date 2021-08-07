@@ -21,13 +21,15 @@ void BattleCityManager::InitializeGame()
 	ConfigLoader data_loader;
 	AssetLoader asset_loader(game_data.config_root_folder, game_data.textures_folder, game_data.fonts_folder, game_data.sounds_folder);
 	
-	SceneMainMenu* main_menu_scene = new SceneMainMenu();
+	std::function<void()> m_confirmation_delegate = [&, this]() { StartGame(); };
+	//TODO: SHOULD OPTIMIZE SCENE MANAGEMENT BECAUSE ALL SCENES ARE LOADED AT BEGINNING
+	//SceneMainMenu* main_menu_scene = new SceneMainMenu(m_confirmation_delegate);
 	SceneGamePlay* gameplay_scene_1 = new SceneGamePlay("level_001\\Level_001.json");
-	SceneGamePlay* gameplay_scene_2 = new SceneGamePlay("level_002\\Level_002.json");
+	//SceneGamePlay* gameplay_scene_2 = new SceneGamePlay("level_002\\Level_002.json");
 
-	m_game_manager.InitializeSystems(game_data, data_loader, asset_loader, main_menu_scene);
+	m_game_manager.InitializeSystems(game_data, data_loader, asset_loader, gameplay_scene_1);
 	m_game_manager.AddScene(gameplay_scene_1);
-	m_game_manager.AddScene(gameplay_scene_2);
+	//m_game_manager.AddScene(gameplay_scene_2);
 }
 
 void BattleCitySFMLClone::Managers::BattleCityManager::StartGameLoop()
@@ -40,7 +42,12 @@ void BattleCitySFMLClone::Managers::BattleCityManager::CleanGameResources()
 	m_game_manager.CleanUpSystems();
 }
 
-void BattleCityManager::InitializeGameData(GameData& game_data)
+void BattleCityManager::StartGame()
+{
+	m_game_manager.ChangeScene(1);
+}
+
+void BattleCityManager::InitializeGameData(GameEngine::GameDataConfig::GameData& game_data)
 {
 	game_data.resX = 880;
 	game_data.resY = 880;

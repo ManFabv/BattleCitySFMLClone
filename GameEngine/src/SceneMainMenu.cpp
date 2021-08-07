@@ -14,7 +14,7 @@ void SceneMainMenu::InitializeSystems(const GameData& game_data, ConfigLoader& c
 	entt::entity gamefont_start_entity = m_registry.create();
 	LoadGameFonts(gamefont_title_entity, gamefont_start_entity, asset_loader, game_data.font_name);
 
-	m_menu_player_input_system = new MenuCustomPlayerInputSystem();
+	m_menu_player_input_system = new MenuCustomPlayerInputSystem(m_confirmation_delegate);
 }
 
 void SceneMainMenu::CleanUpSystems()

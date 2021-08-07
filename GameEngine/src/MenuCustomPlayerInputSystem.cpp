@@ -18,6 +18,7 @@ void MenuCustomPlayerInputSystem::Execute(entt::registry& scene_registry)
 		if (sf::Keyboard::isKeyPressed(input.confirm))
 		{
 			input.pressed_confirm = true;
+			m_confirmation_delegate();
 		}
 		else if (sf::Keyboard::isKeyPressed(input.move_up))
 		{

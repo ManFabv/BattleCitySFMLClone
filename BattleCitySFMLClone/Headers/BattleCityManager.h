@@ -15,6 +15,7 @@ namespace BattleCitySFMLClone
 			void StartGameLoop();
 			void CleanGameResources();
 
+			void StartGame();
 			void InitializeGameData(GameEngine::GameDataConfig::GameData& game_data);
 			GameEngine::GameManagerMain::GameManager m_game_manager;
 		};
