@@ -1,7 +1,8 @@
 #pragma once
 
 #include "GameEngineExportDefine.h"
-#include <iostream>
+#include <string>
+#include <vector>
 
 namespace GameEngine
 {

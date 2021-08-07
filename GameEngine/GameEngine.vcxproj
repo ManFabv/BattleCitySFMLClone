@@ -24,6 +24,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\GameEngine\AbstractSceneBase.h" />
     <ClInclude Include="include\GameEngine\AnimationSystem.h" />
     <ClInclude Include="include\GameEngine\AssetLoader.h" />
     <ClInclude Include="include\GameEngine\ConfigLoader.h" />
@@ -38,8 +39,10 @@
     <ClInclude Include="include\GameEngine\PlayerAnimatorControllerSystem.h" />
     <ClInclude Include="include\GameEngine\RenderGUISystem.h" />
     <ClInclude Include="include\GameEngine\RenderSystem.h" />
+    <ClInclude Include="include\GameEngine\SceneGamePlay.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\AbstractSceneBase.cpp" />
     <ClCompile Include="src\AnimationSystem.cpp" />
     <ClCompile Include="src\AssetLoader.cpp" />
     <ClCompile Include="src\ConfigLoader.cpp" />
@@ -51,6 +54,7 @@
     <ClCompile Include="src\PlayerAnimatorControllerSystem.cpp" />
     <ClCompile Include="src\RenderGUISystem.cpp" />
     <ClCompile Include="src\RenderSystem.cpp" />
+    <ClCompile Include="src\SceneGamePlay.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

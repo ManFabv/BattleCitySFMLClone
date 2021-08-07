@@ -3,6 +3,7 @@
 using namespace BattleCitySFMLClone::Managers;
 using namespace GameEngine::DataUtils;
 using namespace GameEngine::GameDataConfig;
+using namespace GameEngine::Scenes;
 
 BattleCityManager::~BattleCityManager()
 {
@@ -22,7 +23,10 @@ void BattleCityManager::InitializeGame()
 
 	ConfigLoader data_loader;
 	AssetLoader asset_loader(game_data.config_root_folder, game_data.textures_folder, game_data.fonts_folder, game_data.sounds_folder);
-	m_game_manager.InitializeSystems(game_data, data_loader, asset_loader);
+	
+	SceneGamePlay* gameplay_scene = new SceneGamePlay();
+
+	m_game_manager.InitializeSystems(game_data, data_loader, asset_loader, gameplay_scene);
 }
 
 void BattleCitySFMLClone::Managers::BattleCityManager::StartGameLoop()

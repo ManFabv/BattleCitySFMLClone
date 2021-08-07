@@ -56,6 +56,12 @@
     <ClInclude Include="include\GameEngine\DynamicColliderSystem.h">
       <Filter>Include\GameEngine</Filter>
     </ClInclude>
+    <ClInclude Include="include\GameEngine\AbstractSceneBase.h">
+      <Filter>Include\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameEngine\SceneGamePlay.h">
+      <Filter>Include\GameEngine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GameManager.cpp">
@@ -89,6 +95,12 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\DynamicColliderSystem.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AbstractSceneBase.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SceneGamePlay.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
