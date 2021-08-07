@@ -15,51 +15,64 @@ void BattleCityManager::Run()
 
 void BattleCityManager::InitializeGame()
 {
-	GameData game_data;
-	InitializeGameData(game_data);
+	current_scene_index = 0;
+	InitializeGameData();
 
-	ConfigLoader data_loader;
-	AssetLoader asset_loader(game_data.config_root_folder, game_data.textures_folder, game_data.fonts_folder, game_data.sounds_folder);
+	m_data_loader = new ConfigLoader();
+	m_asset_loader = new AssetLoader(m_game_data.config_root_folder, m_game_data.textures_folder, m_game_data.fonts_folder, m_game_data.sounds_folder);
 	
-	std::function<void()> m_confirmation_delegate = [&, this]() { StartGame(); };
+	std::function<void()> m_confirmation_delegate = [&, this]() { LoadNextGameLevel(); };
 	//TODO: SHOULD OPTIMIZE SCENE MANAGEMENT BECAUSE ALL SCENES ARE LOADED AT BEGINNING
-	//SceneMainMenu* main_menu_scene = new SceneMainMenu(m_confirmation_delegate);
+	SceneMainMenu* main_menu_scene = new SceneMainMenu(m_confirmation_delegate);
 	SceneGamePlay* gameplay_scene_1 = new SceneGamePlay("level_001\\Level_001.json");
-	//SceneGamePlay* gameplay_scene_2 = new SceneGamePlay("level_002\\Level_002.json");
+	SceneGamePlay* gameplay_scene_2 = new SceneGamePlay("level_002\\Level_002.json");
 
-	m_game_manager.InitializeSystems(game_data, data_loader, asset_loader, gameplay_scene_1);
+	m_game_manager.InitializeSystems(&m_game_data, m_data_loader, m_asset_loader, main_menu_scene);
 	m_game_manager.AddScene(gameplay_scene_1);
-	//m_game_manager.AddScene(gameplay_scene_2);
+	m_game_manager.AddScene(gameplay_scene_2);
 }
 
-void BattleCitySFMLClone::Managers::BattleCityManager::StartGameLoop()
+void BattleCityManager::StartGameLoop()
 {
 	m_game_manager.RunGameLoop();
 }
 
-void BattleCitySFMLClone::Managers::BattleCityManager::CleanGameResources()
+void BattleCityManager::CleanGameResources()
 {
 	m_game_manager.CleanUpSystems();
+
+	if (m_data_loader != nullptr)
+	{
+		delete m_data_loader;
+		m_data_loader = nullptr;
+	}
+	if (m_asset_loader != nullptr)
+	{
+		delete m_asset_loader;
+		m_asset_loader = nullptr;
+	}
 }
 
-void BattleCityManager::StartGame()
+void BattleCityManager::LoadNextGameLevel()
 {
-	m_game_manager.ChangeScene(1);
+	current_scene_index++;
+	m_game_manager.ChangeScene(current_scene_index);
+	StartGameLoop();
 }
 
-void BattleCityManager::InitializeGameData(GameEngine::GameDataConfig::GameData& game_data)
+void BattleCityManager::InitializeGameData()
 {
-	game_data.resX = 880;
-	game_data.resY = 880;
-	game_data.world_scale = 5;
-	game_data.entities_scale = 4;
-	game_data.window_title = "Battle City SFML Clone";
-	game_data.config_root_folder = "assets";
-	game_data.animations_folder = "animations";
-	game_data.player_config = "player_anim.json";
-	game_data.textures_folder = "textures";
-	game_data.fonts_folder = "fonts";
-	game_data.sounds_folder = "audio";
-	game_data.font_name = "EndlessBossBattleRegular-v7Ey.ttf";
-	game_data.gameplay_levels_folder_name = "levels";
+	m_game_data.resX = 880;
+	m_game_data.resY = 880;
+	m_game_data.world_scale = 5;
+	m_game_data.entities_scale = 4;
+	m_game_data.window_title = "Battle City SFML Clone";
+	m_game_data.config_root_folder = "assets";
+	m_game_data.animations_folder = "animations";
+	m_game_data.player_config = "player_anim.json";
+	m_game_data.textures_folder = "textures";
+	m_game_data.fonts_folder = "fonts";
+	m_game_data.sounds_folder = "audio";
+	m_game_data.font_name = "EndlessBossBattleRegular-v7Ey.ttf";
+	m_game_data.gameplay_levels_folder_name = "levels";
 }

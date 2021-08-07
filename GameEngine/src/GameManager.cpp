@@ -20,22 +20,22 @@ void GameManager::AddScene(GameEngine::Scenes::AbstractSceneBase* new_scene)
 void GameManager::ChangeScene(int scene_id)
 {
 	if (m_current_scene != nullptr)
-		m_current_scene->CleanUpSystems();
+		m_current_scene->PrepareCleanup();
 
 	m_current_scene = m_scenes[scene_id];
 
 	m_current_scene->InitializeSystems(*m_game_data, *m_config_loader, *m_asset_loader);
 }
 
-void GameManager::InitializeSystems(GameData& game_data, ConfigLoader& config_loader, AssetLoader& asset_loader, GameEngine::Scenes::AbstractSceneBase* initial_scene)
+void GameManager::InitializeSystems(GameData* game_data, ConfigLoader* config_loader, AssetLoader* asset_loader, GameEngine::Scenes::AbstractSceneBase* initial_scene)
 {
-	m_game_data = &game_data;
-	m_config_loader = &config_loader;
-	m_asset_loader = &asset_loader;
+	m_game_data = game_data;
+	m_config_loader = config_loader;
+	m_asset_loader = asset_loader;
 
 	AddScene(initial_scene);
 
-	m_current_scene->InitializeSystems(game_data, config_loader, asset_loader);
+	m_current_scene->InitializeSystems(*m_game_data, *m_config_loader, *m_asset_loader);
 }
 
 void GameManager::RunGameLoop()
@@ -49,7 +49,7 @@ void GameManager::CleanUpSystems()
 	{
 		if (scene != nullptr)
 		{
-			scene->CleanUpSystems();
+			scene->CleanupImmediate();
 			delete scene;
 			scene = nullptr;
 		}

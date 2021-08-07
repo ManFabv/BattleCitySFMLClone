@@ -14,7 +14,7 @@ void AbstractSceneBase::RunGameLoop()
 	sf::Time delta_time;
 	m_is_paused = false;
 
-	while (m_window->isOpen())
+	while (!m_prepare_cleanup && m_window->isOpen())
 	{
 		delta_time = game_clock.restart();
 		TakePlayerInput();
@@ -23,6 +23,7 @@ void AbstractSceneBase::RunGameLoop()
 		UpdateUI(delta_time.asSeconds());
 		DrawEntities();
 		CheckWinLoseConditions();
+		CheckIfShouldCleanUp();
 	}
 }
 
@@ -34,6 +35,17 @@ void AbstractSceneBase::CleanUpSystems()
 void AbstractSceneBase::PauseGame(bool pause)
 {
 	m_is_paused = pause;
+}
+
+void AbstractSceneBase::PrepareCleanup()
+{
+	m_prepare_cleanup = true;
+}
+
+void AbstractSceneBase::CleanupImmediate()
+{
+	PrepareCleanup();
+	CleanUpSystems();
 }
 
 void AbstractSceneBase::TakePlayerInput()
@@ -81,8 +93,18 @@ void AbstractSceneBase::DrawEntities()
 	m_window->display();
 }
 
+void AbstractSceneBase::CheckIfShouldCleanUp()
+{
+	if (m_prepare_cleanup)
+	{
+		m_window->close(); 
+		CleanUpSystems();
+	}
+}
+
 void AbstractSceneBase::SetupCommonSystems(int resX, int resY, const std::string& window_title)
 {
+	m_prepare_cleanup = false;
 	m_window = new sf::RenderWindow(sf::VideoMode(resX, resY), window_title);
 	m_window->setVerticalSyncEnabled(true);
 

@@ -18,7 +18,7 @@ namespace GameEngine
 			GameManager();
 			void AddScene(GameEngine::Scenes::AbstractSceneBase* new_scene);
 			void ChangeScene(int scene_id);
-			void InitializeSystems(GameEngine::GameDataConfig::GameData& game_data, GameEngine::DataUtils::ConfigLoader& config_loader, GameEngine::DataUtils::AssetLoader& asset_loader, GameEngine::Scenes::AbstractSceneBase* initial_scene);
+			void InitializeSystems(GameEngine::GameDataConfig::GameData* game_data, GameEngine::DataUtils::ConfigLoader* config_loader, GameEngine::DataUtils::AssetLoader* asset_loader, GameEngine::Scenes::AbstractSceneBase* initial_scene);
 			void RunGameLoop();
 			void CleanUpSystems();
 			void PauseGame(bool pause);

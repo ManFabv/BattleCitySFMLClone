@@ -23,10 +23,12 @@ namespace GameEngine
 		public:
 			virtual void InitializeSystems(const GameEngine::GameDataConfig::GameData& game_data, GameEngine::DataUtils::ConfigLoader& config_loader, GameEngine::DataUtils::AssetLoader& asset_loader);
 			void RunGameLoop();
-			virtual void CleanUpSystems();
 			void PauseGame(bool pause);
+			void PrepareCleanup();
+			void CleanupImmediate();
 
 		protected:
+			virtual void CleanUpSystems();
 			virtual void CustomPlayerInput() = 0;
 			void TakePlayerInput();
 			void UpdateEntities(float dt);
@@ -34,6 +36,7 @@ namespace GameEngine
 			void DrawEntities();
 			virtual void UpdateUI(float dt) = 0;
 			virtual void CheckWinLoseConditions() = 0;
+			void CheckIfShouldCleanUp();
 
 			entt::registry m_registry;
 			sf::Event m_event;
@@ -45,6 +48,7 @@ namespace GameEngine
 			GameEngine::Systems::PlayerAnimatorControllerSystem* m_playeranimatorcontroller_system;
 			GameEngine::Systems::InputSystem* m_input_system;
 			GameEngine::Systems::DynamicColliderSystem* m_dynamic_collider_system;
+			bool m_prepare_cleanup;
 			bool m_is_paused;
 
 		private:
