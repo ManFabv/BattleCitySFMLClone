@@ -1,4 +1,5 @@
 #include "GameplayUtilities/ScoreManager.h"
+#include <algorithm>
 
 using namespace GameplayUtilities::Scores;
 
@@ -19,6 +20,16 @@ const size_t ScoreManager::ScoresCount()
 void ScoreManager::AddNewScore(Score score)
 {
 	scores.push_back(score);
+	//TODO: improve this sorted vector
+	std::sort(scores.begin(), scores.end(), [](Score a, Score b) {
+		return (a.GetScore() > b.GetScore());
+	});
+}
+
+void ScoreManager::AddNewScore(const std::string& user_name_score_owner, const long int new_score)
+{
+	Score score(user_name_score_owner, new_score);
+	AddNewScore(score);
 }
 
 void ScoreManager::RemoveScore(const std::string& user_name_score_owner)
@@ -45,4 +56,9 @@ const long int ScoreManager::GetScoreOfUser(const std::string& user_name_score_o
 		}
 	}
 	return -1;
+}
+
+const long int ScoreManager::GetHighScore()
+{
+	return scores[0].GetScore();
 }

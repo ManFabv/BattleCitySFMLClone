@@ -2,6 +2,7 @@
 #include "GameEngine/GameComponents.h"
 #include "GameEngine/AssetLoader.h"
 #include <rapidjson/document.h>
+#include <string>
 
 using namespace GameEngine::GameManagerMain;
 using namespace GameplayUtilities::Scores;
@@ -16,6 +17,10 @@ void GameManager::InitializeSystems(const GameData& game_data, ConfigLoader& con
 	world_scale.y = game_data.world_scale;
 	entities_scale.x = game_data.entities_scale;
 	entities_scale.y = game_data.entities_scale;
+
+	m_user_name = "guest";
+	m_score_manager.AddNewScore("dev", 1000);
+	m_score_manager.AddNewScore(m_user_name, 0);
 
 	std::string player_json = config_loader.LoadDataFrom(game_data.config_root_folder, game_data.animations_folder, game_data.player_config);
 	
@@ -70,6 +75,7 @@ void GameManager::RunGameLoop()
 		TakePlayerInput();
 		UpdateEntities(delta_time.asSeconds());
 		UpdatePhysics();
+		UpdateUI(delta_time.asSeconds());
 		DrawEntities();
 	}
 }
@@ -86,6 +92,7 @@ void GameManager::CleanUpSystems()
 	delete m_input_system;
 	delete m_playeranimatorcontroller_system;
 	delete m_dynamic_collider_system;
+	delete m_player_score_font;
 }
 
 void GameManager::PauseGame(bool pause)
@@ -141,6 +148,11 @@ void GameManager::DrawEntities()
 	m_rendergui_system->Execute(m_registry);
 
 	m_window->display();
+}
+
+void GameManager::UpdateUI(float dt)
+{
+	UpdateScoreUI();
 }
 
 void GameManager::LoadDrawableEntity(entt::entity entity, AssetLoader& asset_loader, const std::string& file_name)
@@ -227,13 +239,13 @@ void GameManager::LoadMovementForEntity(entt::entity entity)
 
 void GameManager::LoadGameFont(entt::entity entity, AssetLoader& asset_loader, const std::string& file_name)
 {
-	sf::Text* m_player_font = new sf::Text();
-	m_player_font->setFont(asset_loader.GetFont(file_name));
-	m_player_font->setString("Score: 0000");
-	m_player_font->setFillColor(sf::Color::White); //TODO: style should be loaded from config file
-	m_player_font->setCharacterSize(24); //TODO: style should be loaded from config file
-	m_player_font->setPosition(336, 8); //TODO: score should be at the top center
-	m_registry.emplace<DrawableFontComponent>(entity, *m_player_font);
+	m_player_score_font = new sf::Text();
+	m_player_score_font->setFont(asset_loader.GetFont(file_name));
+	UpdateScoreUI();
+	m_player_score_font->setFillColor(sf::Color::White); //TODO: style should be loaded from config file
+	m_player_score_font->setCharacterSize(24); //TODO: style should be loaded from config file
+	m_player_score_font->setPosition(272, 8); //TODO: score should be at the top center
+	m_registry.emplace<DrawableFontComponent>(entity, *m_player_score_font);
 }
 
 void GameManager::AddPlayerInputComponent(entt::entity entity)
@@ -296,4 +308,13 @@ void GameManager::CreateTileAndAddComponents(GameEngine::DataUtils::AssetLoader&
 	StaticColliderComponent* rigid_collider_component = new StaticColliderComponent();
 	rigid_collider_component->m_fixture = sprite->getGlobalBounds();
 	m_registry.emplace<StaticColliderComponent>(entity, *rigid_collider_component);
+}
+
+void GameEngine::GameManagerMain::GameManager::UpdateScoreUI()
+{
+	std::string score_text = "HIGHSCORE: ";
+	score_text += std::to_string(m_score_manager.GetHighScore());
+	score_text += " - SCORE ";
+	score_text += std::to_string(m_score_manager.GetScoreOfUser(m_user_name));
+	m_player_score_font->setString(score_text);
 }

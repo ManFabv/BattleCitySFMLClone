@@ -31,6 +31,7 @@ namespace GameEngine
 			void UpdateEntities(float dt);
 			void UpdatePhysics();
 			void DrawEntities();
+			void UpdateUI(float dt);
 
 			void LoadDrawableEntity(entt::entity entity, GameEngine::DataUtils::AssetLoader& asset_loader, const std::string& file_name);
 			void LoadAnimationInformationForEntity(entt::entity entity, const GameEngine::GameDataConfig::AnimationData& anim_data);
@@ -39,6 +40,7 @@ namespace GameEngine
 			void AddPlayerInputComponent(entt::entity entity);
 			void LoadLevel(GameEngine::DataUtils::AssetLoader& asset_loader, const std::string& level_json);
 			void CreateTileAndAddComponents(GameEngine::DataUtils::AssetLoader& asset_loader, int atlas_size, int map_size, int tilewidth, int tileheight, int tiletype, int position_in_array, const std::string& atlas_name);
+			void UpdateScoreUI();
 
 			entt::registry m_registry;
 			sf::Event m_event;
@@ -53,6 +55,8 @@ namespace GameEngine
 			GameplayUtilities::Scores::ScoreManager m_score_manager;
 			sf::Vector2f world_scale;
 			sf::Vector2f entities_scale;
+			sf::Text* m_player_score_font;
+			std::string m_user_name;
 			bool m_is_paused;
 		};
 	}
