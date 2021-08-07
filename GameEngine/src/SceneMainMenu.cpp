@@ -9,8 +9,9 @@ void SceneMainMenu::InitializeSystems(const GameData& game_data, ConfigLoader& c
 {
 	AbstractSceneBase::InitializeSystems(game_data, config_loader, asset_loader);
 
-	entt::entity gamefont_entity = m_registry.create();
-	LoadGameFonts(gamefont_entity, asset_loader, game_data.font_name);
+	entt::entity gamefont_title_entity = m_registry.create();
+	entt::entity gamefont_start_entity = m_registry.create();
+	LoadGameFonts(gamefont_title_entity, gamefont_start_entity, asset_loader, game_data.font_name);
 }
 
 void SceneMainMenu::CleanUpSystems()
@@ -42,13 +43,21 @@ void SceneMainMenu::CustomPlayerInput()
 {
 }
 
-void SceneMainMenu::LoadGameFonts(entt::entity entity, AssetLoader& asset_loader, const std::string& file_name)
+void SceneMainMenu::LoadGameFonts(entt::entity entity_title, entt::entity entity_start, AssetLoader& asset_loader, const std::string& file_name)
 {
 	m_game_title_font = new sf::Text();
 	m_game_title_font->setFont(asset_loader.GetFont(file_name));
 	m_game_title_font->setFillColor(sf::Color::White); //TODO: style should be loaded from config file
 	m_game_title_font->setCharacterSize(64); //TODO: style should be loaded from config file
-	m_game_title_font->setPosition(56, 8); //TODO: score should be at the top center
+	m_game_title_font->setPosition(56, 128); //TODO: score should be at the top center
 	m_game_title_font->setString("BATTLE CITY SFML CLONE");
-	m_registry.emplace<DrawableFontComponent>(entity, *m_game_title_font);
+	m_registry.emplace<DrawableFontComponent>(entity_title, *m_game_title_font);
+
+	m_start_game_font = new sf::Text();
+	m_start_game_font->setFont(asset_loader.GetFont(file_name));
+	m_start_game_font->setFillColor(sf::Color::White); //TODO: style should be loaded from config file
+	m_start_game_font->setCharacterSize(32); //TODO: style should be loaded from config file
+	m_start_game_font->setPosition(200, 610); //TODO: score should be at the top center
+	m_start_game_font->setString("PRESS ENTER TO BEGIN PLAY...");
+	m_registry.emplace<DrawableFontComponent>(entity_start, *m_start_game_font);
 }

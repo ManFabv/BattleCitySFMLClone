@@ -19,7 +19,7 @@ namespace GameEngine
 			virtual void CheckWinLoseConditions();
 
 			virtual void CustomPlayerInput() override;
-			void LoadGameFonts(entt::entity entity, GameEngine::DataUtils::AssetLoader& asset_loader, const std::string& file_name);
+			void LoadGameFonts(entt::entity entity_title, entt::entity entity_start, GameEngine::DataUtils::AssetLoader& asset_loader, const std::string& file_name);
 
 			sf::Text* m_game_title_font;
 			sf::Text* m_start_game_font;
