@@ -12,6 +12,7 @@ namespace GameEngine
 		class GAMEENGINE_API SceneGamePlay : public GameEngine::Scenes::AbstractSceneBase
 		{
 		public:
+			SceneGamePlay(std::string json_level_name) :m_json_level_name(json_level_name) {}
 			virtual void InitializeSystems(const GameEngine::GameDataConfig::GameData& game_data, GameEngine::DataUtils::ConfigLoader& config_loader, GameEngine::DataUtils::AssetLoader& asset_loader) override;
 			virtual void CleanUpSystems() override;
 		private:
@@ -34,6 +35,7 @@ namespace GameEngine
 			sf::Vector2f entities_scale;
 			sf::Text* m_player_score_font;
 			std::string m_user_name;
+			std::string m_json_level_name;
 		};
 	}
 }

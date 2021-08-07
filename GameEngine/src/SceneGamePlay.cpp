@@ -47,7 +47,7 @@ void SceneGamePlay::InitializeSystems(const GameData& game_data, ConfigLoader& c
 	entt::entity gamefont_entity = m_registry.create();
 	LoadGameFont(gamefont_entity, asset_loader, game_data.font_name);
 
-	std::string level_json = config_loader.LoadDataFrom(game_data.config_root_folder, game_data.gameplay_levels_folder_name, game_data.gameplay_level_name);
+	std::string level_json = config_loader.LoadDataFrom(game_data.config_root_folder, game_data.gameplay_levels_folder_name, m_json_level_name);
 	LoadLevel(asset_loader, level_json);
 
 	entt::entity enemy_entity = m_registry.create();

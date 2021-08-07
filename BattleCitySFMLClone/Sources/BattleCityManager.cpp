@@ -22,10 +22,12 @@ void BattleCityManager::InitializeGame()
 	AssetLoader asset_loader(game_data.config_root_folder, game_data.textures_folder, game_data.fonts_folder, game_data.sounds_folder);
 	
 	SceneMainMenu* main_menu_scene = new SceneMainMenu();
-	SceneGamePlay* gameplay_scene = new SceneGamePlay();
+	SceneGamePlay* gameplay_scene_1 = new SceneGamePlay("level_001\\Level_001.json");
+	SceneGamePlay* gameplay_scene_2 = new SceneGamePlay("level_002\\Level_002.json");
 
 	m_game_manager.InitializeSystems(game_data, data_loader, asset_loader, main_menu_scene);
-	m_game_manager.AddScene(gameplay_scene);
+	m_game_manager.AddScene(gameplay_scene_1);
+	m_game_manager.AddScene(gameplay_scene_2);
 }
 
 void BattleCitySFMLClone::Managers::BattleCityManager::StartGameLoop()
@@ -52,6 +54,5 @@ void BattleCityManager::InitializeGameData(GameData& game_data)
 	game_data.fonts_folder = "fonts";
 	game_data.sounds_folder = "audio";
 	game_data.font_name = "EndlessBossBattleRegular-v7Ey.ttf";
-	game_data.gameplay_level_name = "level_001\\Level_001.json";
 	game_data.gameplay_levels_folder_name = "levels";
 }
