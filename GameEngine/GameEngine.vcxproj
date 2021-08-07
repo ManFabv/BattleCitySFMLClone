@@ -35,6 +35,7 @@
     <ClInclude Include="include\GameEngine\GameEngineExportDefine.h" />
     <ClInclude Include="include\GameEngine\GameManager.h" />
     <ClInclude Include="include\GameEngine\InputSystem.h" />
+    <ClInclude Include="include\GameEngine\MenuCustomPlayerInputSystem.h" />
     <ClInclude Include="include\GameEngine\MovementSystem.h" />
     <ClInclude Include="include\GameEngine\PlayerAnimatorControllerSystem.h" />
     <ClInclude Include="include\GameEngine\RenderGUISystem.h" />
@@ -51,6 +52,7 @@
     <ClCompile Include="src\FilePathHelper.cpp" />
     <ClCompile Include="src\GameManager.cpp" />
     <ClCompile Include="src\InputSystem.cpp" />
+    <ClCompile Include="src\MenuCustomPlayerInputSystem.cpp" />
     <ClCompile Include="src\MovementSystem.cpp" />
     <ClCompile Include="src\PlayerAnimatorControllerSystem.cpp" />
     <ClCompile Include="src\RenderGUISystem.cpp" />

@@ -3,7 +3,7 @@
 #include "GameEngineExportDefine.h"
 
 #include "GameEngine/AbstractSceneBase.h"
-#include "GameplayUtilities/ScoreManager.h"
+#include "GameEngine/MenuCustomPlayerInputSystem.h"
 
 namespace GameEngine
 {
@@ -23,6 +23,7 @@ namespace GameEngine
 
 			sf::Text* m_game_title_font;
 			sf::Text* m_start_game_font;
+			GameEngine::Systems::MenuCustomPlayerInputSystem* m_menu_player_input_system;
 		};
 	}
 }

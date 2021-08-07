@@ -170,6 +170,7 @@
     <Media Include="assets\audio\explode_eagle.wav" />
     <Media Include="assets\audio\hit.wav" />
     <Media Include="assets\audio\lost.wav" />
+    <Media Include="assets\audio\menu_select.wav" />
     <Media Include="assets\audio\player_movement.wav" />
     <Media Include="assets\audio\win.wav" />
   </ItemGroup>

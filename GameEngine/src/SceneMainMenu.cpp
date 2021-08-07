@@ -4,6 +4,7 @@ using namespace GameEngine::DataUtils;
 using namespace GameEngine::GameDataConfig;
 using namespace GameEngine::Scenes;
 using namespace GameEngine::Components;
+using namespace GameEngine::Systems;
 
 void SceneMainMenu::InitializeSystems(const GameData& game_data, ConfigLoader& config_loader, AssetLoader& asset_loader)
 {
@@ -12,6 +13,8 @@ void SceneMainMenu::InitializeSystems(const GameData& game_data, ConfigLoader& c
 	entt::entity gamefont_title_entity = m_registry.create();
 	entt::entity gamefont_start_entity = m_registry.create();
 	LoadGameFonts(gamefont_title_entity, gamefont_start_entity, asset_loader, game_data.font_name);
+
+	m_menu_player_input_system = new MenuCustomPlayerInputSystem();
 }
 
 void SceneMainMenu::CleanUpSystems()
@@ -29,18 +32,27 @@ void SceneMainMenu::CleanUpSystems()
 		delete m_start_game_font;
 		m_start_game_font = nullptr;
 	}
+
+	if (m_menu_player_input_system != nullptr)
+	{
+		delete m_menu_player_input_system;
+		m_menu_player_input_system = nullptr;
+	}
 }
 
 void SceneMainMenu::UpdateUI(float dt)
 {
+	//TODO: NOTHING SO FAR, WE SHOULD CHANGE STRUCTURE TO AVOID OVERRIDING UNNEEDED METHODS
 }
 
 void SceneMainMenu::CheckWinLoseConditions()
 {
+	//TODO: NOTHING SO FAR, WE SHOULD CHANGE STRUCTURE TO AVOID OVERRIDING UNNEEDED METHODS
 }
 
 void SceneMainMenu::CustomPlayerInput()
 {
+	m_menu_player_input_system->Execute(m_registry);
 }
 
 void SceneMainMenu::LoadGameFonts(entt::entity entity_title, entt::entity entity_start, AssetLoader& asset_loader, const std::string& file_name)

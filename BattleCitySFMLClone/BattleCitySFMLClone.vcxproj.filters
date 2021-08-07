@@ -71,6 +71,9 @@
     <Media Include="assets\audio\win.wav">
       <Filter>assets\audio</Filter>
     </Media>
+    <Media Include="assets\audio\menu_select.wav">
+      <Filter>assets\audio</Filter>
+    </Media>
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\animations\enemy_anim.json">
