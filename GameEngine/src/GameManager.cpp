@@ -27,7 +27,7 @@ void GameManager::InitializeSystems(const GameData& game_data, ConfigLoader& con
 	rapidjson::Document player_json_document;
 	player_json_document.Parse(player_json.c_str());
 
-	std::string player_atlas_name = player_json_document["atlas_name"].GetString();
+	std::string entities_atlas_name = player_json_document["atlas_name"].GetString();
 	entt::entity player_entity = m_registry.create(); 
 	
 	AnimationData player_anim_data;
@@ -40,7 +40,7 @@ void GameManager::InitializeSystems(const GameData& game_data, ConfigLoader& con
 	player_anim_data.initial_animation = player_json_document["initial_animation"].GetString();
 	player_anim_data.animations_loop = player_json_document["animations_loop"].GetBool();
 	//TODO: player_json_document["animations"] should be loaded from config
-	LoadDrawableEntity(player_entity, asset_loader, player_atlas_name);
+	LoadPlayerEntity(player_entity, asset_loader, entities_atlas_name);
 	LoadAnimationInformationForEntity(player_entity, player_anim_data);
 	LoadMovementForEntity(player_entity);
 	AddPlayerInputComponent(player_entity);
@@ -50,6 +50,9 @@ void GameManager::InitializeSystems(const GameData& game_data, ConfigLoader& con
 
 	std::string level_json = config_loader.LoadDataFrom(game_data.config_root_folder, game_data.gameplay_levels_folder_name, game_data.gameplay_level_name);
 	LoadLevel(asset_loader, level_json);
+
+	entt::entity enemy_entity = m_registry.create();
+	LoadEnemyEntity(enemy_entity, asset_loader, entities_atlas_name, 8, 8);
 	
 	m_window = new sf::RenderWindow(sf::VideoMode(game_data.resX, game_data.resY), game_data.window_title);
 	m_window->setVerticalSyncEnabled(true);
@@ -77,6 +80,7 @@ void GameManager::RunGameLoop()
 		UpdatePhysics();
 		UpdateUI(delta_time.asSeconds());
 		DrawEntities();
+		CheckWinLoseConditions();
 	}
 }
 
@@ -155,7 +159,12 @@ void GameManager::UpdateUI(float dt)
 	UpdateScoreUI();
 }
 
-void GameManager::LoadDrawableEntity(entt::entity entity, AssetLoader& asset_loader, const std::string& file_name)
+void GameManager::CheckWinLoseConditions()
+{
+	//TODO: implement this
+}
+
+void GameManager::LoadPlayerEntity(entt::entity entity, AssetLoader& asset_loader, const std::string& file_name)
 {
 	sf::Sprite* m_player_sprite = new sf::Sprite();
 	m_player_sprite->setTexture(asset_loader.GetTexture(file_name));
@@ -168,6 +177,23 @@ void GameManager::LoadDrawableEntity(entt::entity entity, AssetLoader& asset_loa
 
 	DynamicColliderComponent* dynamic_collider_component = new DynamicColliderComponent(*m_player_sprite);
 	m_registry.emplace<DynamicColliderComponent>(entity, *dynamic_collider_component);
+}
+
+void GameManager::LoadEnemyEntity(entt::entity entity, GameEngine::DataUtils::AssetLoader& asset_loader, const std::string& file_name, int posx, int posy)
+{
+	sf::Sprite* m_enemy_sprite = new sf::Sprite();
+	m_enemy_sprite->setTexture(asset_loader.GetTexture(file_name));
+	m_enemy_sprite->setScale(sf::Vector2f(m_enemy_sprite->getScale().x * entities_scale.x, m_enemy_sprite->getScale().y * entities_scale.y));
+	m_enemy_sprite->setTextureRect(sf::IntRect(64, 64, 16, 16));
+	m_enemy_sprite->setPosition(posx, posy); //TODO: player should be at the spawn point position
+	m_registry.emplace<DrawableComponent>(entity, *m_enemy_sprite);
+
+	TransformComponent* transform = new TransformComponent(*m_enemy_sprite);
+	m_registry.emplace<TransformComponent>(entity, *transform);
+
+	StaticColliderComponent* static_collider_component = new StaticColliderComponent();
+	static_collider_component->m_fixture = m_enemy_sprite->getGlobalBounds();
+	m_registry.emplace<StaticColliderComponent>(entity, *static_collider_component);
 }
 
 void GameManager::LoadAnimationInformationForEntity(entt::entity entity, const AnimationData& anim_data)
@@ -305,9 +331,9 @@ void GameManager::CreateTileAndAddComponents(GameEngine::DataUtils::AssetLoader&
 	
 	m_registry.emplace<DrawableComponent>(entity, *sprite);
 
-	StaticColliderComponent* rigid_collider_component = new StaticColliderComponent();
-	rigid_collider_component->m_fixture = sprite->getGlobalBounds();
-	m_registry.emplace<StaticColliderComponent>(entity, *rigid_collider_component);
+	StaticColliderComponent* static_collider_component = new StaticColliderComponent();
+	static_collider_component->m_fixture = sprite->getGlobalBounds();
+	m_registry.emplace<StaticColliderComponent>(entity, *static_collider_component);
 }
 
 void GameEngine::GameManagerMain::GameManager::UpdateScoreUI()

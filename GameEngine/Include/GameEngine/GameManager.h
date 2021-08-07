@@ -32,8 +32,10 @@ namespace GameEngine
 			void UpdatePhysics();
 			void DrawEntities();
 			void UpdateUI(float dt);
+			void CheckWinLoseConditions();
 
-			void LoadDrawableEntity(entt::entity entity, GameEngine::DataUtils::AssetLoader& asset_loader, const std::string& file_name);
+			void LoadPlayerEntity(entt::entity entity, GameEngine::DataUtils::AssetLoader& asset_loader, const std::string& file_name);
+			void LoadEnemyEntity(entt::entity entity, GameEngine::DataUtils::AssetLoader& asset_loader, const std::string& file_name, int posx, int posy);
 			void LoadAnimationInformationForEntity(entt::entity entity, const GameEngine::GameDataConfig::AnimationData& anim_data);
 			void LoadMovementForEntity(entt::entity entity);
 			void LoadGameFont(entt::entity entity, GameEngine::DataUtils::AssetLoader& asset_loader, const std::string& file_name);
