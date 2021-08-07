@@ -37,6 +37,17 @@ namespace GameEngine
 			bool pressed_move_down;
 		};
 
+		struct GAMEENGINE_API CustomMenuPlayerInputComponent
+		{
+		public:
+			sf::Keyboard::Key move_up;
+			sf::Keyboard::Key move_down;
+			sf::Keyboard::Key confirm;
+			bool pressed_move_up;
+			bool pressed_move_down;
+			bool pressed_confirm;
+		};
+
 		struct GAMEENGINE_API StaticColliderComponent
 		{
 		public:

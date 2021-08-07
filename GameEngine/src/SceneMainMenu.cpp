@@ -72,4 +72,10 @@ void SceneMainMenu::LoadGameFonts(entt::entity entity_title, entt::entity entity
 	m_start_game_font->setPosition(200, 610); //TODO: score should be at the top center
 	m_start_game_font->setString("PRESS ENTER TO BEGIN PLAY...");
 	m_registry.emplace<DrawableFontComponent>(entity_start, *m_start_game_font);
+
+	CustomMenuPlayerInputComponent* custom_menu_player_input_component = new CustomMenuPlayerInputComponent();
+	custom_menu_player_input_component->move_up = sf::Keyboard::Up;
+	custom_menu_player_input_component->move_down = sf::Keyboard::Down;
+	custom_menu_player_input_component->confirm = sf::Keyboard::Enter;
+	m_registry.emplace<CustomMenuPlayerInputComponent>(entity_start, *custom_menu_player_input_component);
 }
