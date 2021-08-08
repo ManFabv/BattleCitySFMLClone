@@ -68,6 +68,9 @@
     <ClInclude Include="include\GameEngine\MenuCustomPlayerInputSystem.h">
       <Filter>Include\GameEngine</Filter>
     </ClInclude>
+    <ClInclude Include="include\GameEngine\AudioSystem.h">
+      <Filter>Include\GameEngine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GameManager.cpp">
@@ -113,6 +116,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\MenuCustomPlayerInputSystem.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AudioSystem.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

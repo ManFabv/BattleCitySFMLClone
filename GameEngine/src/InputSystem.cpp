@@ -5,12 +5,13 @@ using namespace GameEngine::Components;
 
 void InputSystem::Execute(entt::registry& scene_registry)
 {
-	auto input_view = scene_registry.view<CustomPlayerInputComponent, MovementComponent>();
+	auto input_view = scene_registry.view<CustomPlayerInputComponent, MovementComponent, AudioComponent>();
 
 	for (auto input_entity : input_view)
 	{
 		CustomPlayerInputComponent& input = input_view.get<CustomPlayerInputComponent>(input_entity);
 		MovementComponent& movement = input_view.get<MovementComponent>(input_entity);
+		AudioComponent& audio = input_view.get<AudioComponent>(input_entity);
 		input.pressed_move_left = false;
 		input.pressed_move_right = false;
 		input.pressed_move_up = false;
@@ -21,28 +22,33 @@ void InputSystem::Execute(entt::registry& scene_registry)
 			movement.m_velocity.x = -1 * movement.max_velocity;
 			movement.m_velocity.y = 0;
 			input.pressed_move_left = true;
+			audio.shouldPlayAudio = true;
 		}
 		else if (sf::Keyboard::isKeyPressed(input.move_right))
 		{
 			movement.m_velocity.x = 1 * movement.max_velocity;
 			movement.m_velocity.y = 0;
 			input.pressed_move_right = true;
+			audio.shouldPlayAudio = true;
 		}
 		else if (sf::Keyboard::isKeyPressed(input.move_up))
 		{
 			movement.m_velocity.y = -1 * movement.max_velocity;
 			movement.m_velocity.x = 0;
 			input.pressed_move_up = true;
+			audio.shouldPlayAudio = true;
 		}
 		else if (sf::Keyboard::isKeyPressed(input.move_down))
 		{
 			movement.m_velocity.y = 1 * movement.max_velocity;
 			movement.m_velocity.x = 0;
 			input.pressed_move_down = true;
+			audio.shouldPlayAudio = true;
 		}
 		else
 		{
 			movement.m_velocity = sf::Vector2f(0, 0);
+			audio.shouldPlayAudio = false;
 		}
 	}
 }

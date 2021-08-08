@@ -43,6 +43,7 @@ void SceneGamePlay::InitializeSystems(const GameData& game_data, ConfigLoader& c
 	LoadAnimationInformationForEntity(player_entity, player_anim_data);
 	LoadMovementForEntity(player_entity);
 	AddPlayerInputComponent(player_entity);
+	LoadPlayerAudio(player_entity, asset_loader, game_data.ui_confirmation_audio_name);
 
 	entt::entity gamefont_entity = m_registry.create();
 	LoadGameFont(gamefont_entity, asset_loader, game_data.font_name);
@@ -52,6 +53,8 @@ void SceneGamePlay::InitializeSystems(const GameData& game_data, ConfigLoader& c
 
 	entt::entity enemy_entity = m_registry.create();
 	LoadEnemyEntity(enemy_entity, asset_loader, entities_atlas_name, 8, 8);
+
+	m_audio_system = new AudioSystem();
 }
 
 void SceneGamePlay::CleanUpSystems()
@@ -63,6 +66,12 @@ void SceneGamePlay::CleanUpSystems()
 		delete m_player_score_font;
 		m_player_score_font = nullptr;
 	}
+
+	if (m_audio_system != nullptr)
+	{
+		delete m_audio_system;
+		m_audio_system = nullptr;
+	}
 }
 
 void SceneGamePlay::CustomPlayerInput()
@@ -73,6 +82,7 @@ void SceneGamePlay::CustomPlayerInput()
 void SceneGamePlay::UpdateUI(float dt)
 {
 	UpdateScoreUI();
+	m_audio_system->Execute(m_registry);
 }
 
 void SceneGamePlay::CheckWinLoseConditions()
@@ -259,4 +269,13 @@ void SceneGamePlay::UpdateScoreUI()
 	score_text += " - SCORE ";
 	score_text += std::to_string(m_score_manager.GetScoreOfUser(m_user_name));
 	m_player_score_font->setString(score_text);
+}
+
+void SceneGamePlay::LoadPlayerAudio(entt::entity entity, GameEngine::DataUtils::AssetLoader& asset_loader, const std::string& file_name)
+{
+	sf::Sound* ui_sound = new sf::Sound();
+	ui_sound->setBuffer(asset_loader.GetSound(file_name));
+	ui_sound->setLoop(true);
+	AudioComponent* ui_audio_component = new AudioComponent(*ui_sound);
+	m_registry.emplace<AudioComponent>(entity, *ui_audio_component);
 }

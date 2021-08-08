@@ -83,4 +83,5 @@ void BattleCityManager::InitializeGameData()
 	m_game_data.sounds_folder = "audio";
 	m_game_data.font_name = "EndlessBossBattleRegular-v7Ey.ttf";
 	m_game_data.gameplay_levels_folder_name = "levels";
+	m_game_data.ui_confirmation_audio_name = "player_movement.wav";
 }

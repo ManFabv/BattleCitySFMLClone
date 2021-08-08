@@ -4,6 +4,7 @@
 
 #include "GameEngine/AbstractSceneBase.h"
 #include "GameplayUtilities/ScoreManager.h"
+#include "GameEngine/AudioSystem.h"
 
 namespace GameEngine
 {
@@ -29,6 +30,7 @@ namespace GameEngine
 			void LoadLevel(GameEngine::DataUtils::AssetLoader& asset_loader, const std::string& level_json);
 			void CreateTileAndAddComponents(GameEngine::DataUtils::AssetLoader& asset_loader, int atlas_size, int map_size, int tilewidth, int tileheight, int tiletype, int position_in_array, const std::string& atlas_name);
 			void UpdateScoreUI();
+			void LoadPlayerAudio(entt::entity entity, GameEngine::DataUtils::AssetLoader& asset_loader, const std::string& file_name);
 
 			GameplayUtilities::Scores::ScoreManager m_score_manager;
 			sf::Vector2f world_scale;
@@ -36,6 +38,7 @@ namespace GameEngine
 			sf::Text* m_player_score_font;
 			std::string m_user_name;
 			std::string m_json_level_name;
+			GameEngine::Systems::AudioSystem* m_audio_system;
 		};
 	}
 }

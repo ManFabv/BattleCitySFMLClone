@@ -3,11 +3,21 @@
 #include "GameEngineExportDefine.h"
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 namespace GameEngine
 {
 	namespace Components
 	{
+		struct GAMEENGINE_API AudioComponent
+		{
+		public:
+			AudioComponent(sf::Sound& sound) : m_sound(&sound) { shouldPlayAudio = false; }
+			
+			bool shouldPlayAudio;
+			sf::Sound* m_sound;
+		};
+
 		struct GAMEENGINE_API TransformComponent
 		{
 		public:
