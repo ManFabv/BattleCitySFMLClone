@@ -11,14 +11,15 @@ void AudioSystem::Execute(entt::registry& scene_registry)
 	{
 		AudioComponent& audio = ui_audio_view.get<AudioComponent>(ui_audio_entity);
 
-		if (audio.shouldPlayAudio && audio.m_sound->getStatus() != sf::SoundSource::Status::Playing)
+		if (audio.shouldPlayAudio == true && audio.isPlaying == false)
 		{
+			audio.isPlaying = true;
 			audio.m_sound->play();
 		}
-		else
+		else if(audio.shouldPlayAudio == false && audio.isPlaying == true)
 		{
+			audio.isPlaying = false;
 			audio.m_sound->stop();
 		}
-		audio.shouldPlayAudio = false;
 	}
 }

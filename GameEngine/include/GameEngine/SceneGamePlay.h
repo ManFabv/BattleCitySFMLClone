@@ -20,6 +20,7 @@ namespace GameEngine
 			virtual void CustomPlayerInput() override;
 			virtual void UpdateUI(float dt) override;
 			virtual void CheckWinLoseConditions() override;
+			virtual void ProcessAudio();
 
 			void LoadPlayerEntity(entt::entity entity, GameEngine::DataUtils::AssetLoader& asset_loader, const std::string& file_name);
 			void LoadEnemyEntity(entt::entity entity, GameEngine::DataUtils::AssetLoader& asset_loader, const std::string& file_name, int posx, int posy);

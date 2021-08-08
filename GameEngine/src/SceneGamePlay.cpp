@@ -82,12 +82,16 @@ void SceneGamePlay::CustomPlayerInput()
 void SceneGamePlay::UpdateUI(float dt)
 {
 	UpdateScoreUI();
-	m_audio_system->Execute(m_registry);
 }
 
 void SceneGamePlay::CheckWinLoseConditions()
 {
 	//TODO: implement this
+}
+
+void SceneGamePlay::ProcessAudio()
+{
+	m_audio_system->Execute(m_registry);
 }
 
 void SceneGamePlay::LoadPlayerEntity(entt::entity entity, AssetLoader& asset_loader, const std::string& file_name)

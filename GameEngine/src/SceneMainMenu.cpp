@@ -50,6 +50,11 @@ void SceneMainMenu::CheckWinLoseConditions()
 	//TODO: NOTHING SO FAR, WE SHOULD CHANGE STRUCTURE TO AVOID OVERRIDING UNNEEDED METHODS
 }
 
+void SceneMainMenu::ProcessAudio()
+{
+	//TODO: implement this
+}
+
 void SceneMainMenu::CustomPlayerInput()
 {
 	m_menu_player_input_system->Execute(m_registry);

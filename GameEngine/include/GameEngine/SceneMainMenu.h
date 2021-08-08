@@ -18,6 +18,7 @@ namespace GameEngine
 		private:
 			virtual void UpdateUI(float dt);
 			virtual void CheckWinLoseConditions();
+			virtual void ProcessAudio();
 
 			virtual void CustomPlayerInput() override;
 			void LoadGameFonts(entt::entity entity_title, entt::entity entity_start, GameEngine::DataUtils::AssetLoader& asset_loader, const std::string& file_name);

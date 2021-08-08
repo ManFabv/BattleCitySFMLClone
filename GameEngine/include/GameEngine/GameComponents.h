@@ -12,9 +12,10 @@ namespace GameEngine
 		struct GAMEENGINE_API AudioComponent
 		{
 		public:
-			AudioComponent(sf::Sound& sound) : m_sound(&sound) { shouldPlayAudio = false; }
+			AudioComponent(sf::Sound& sound) : m_sound(&sound) { shouldPlayAudio = isPlaying = false; }
 			
 			bool shouldPlayAudio;
+			bool isPlaying;
 			sf::Sound* m_sound;
 		};
 

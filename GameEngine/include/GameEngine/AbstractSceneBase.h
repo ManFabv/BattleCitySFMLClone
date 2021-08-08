@@ -36,6 +36,7 @@ namespace GameEngine
 			void UpdateEntities(float dt);
 			void UpdatePhysics();
 			void DrawEntities();
+			virtual void ProcessAudio() = 0;
 			virtual void UpdateUI(float dt) = 0;
 			virtual void CheckWinLoseConditions() = 0;
 			void CheckIfShouldCleanUp();

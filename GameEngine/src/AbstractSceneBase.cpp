@@ -21,6 +21,7 @@ void AbstractSceneBase::RunGameLoop()
 		delta_time = game_clock.restart();
 		TakePlayerInput();
 		UpdateEntities(delta_time.asSeconds());
+		ProcessAudio();
 		UpdatePhysics();
 		UpdateUI(delta_time.asSeconds());
 		DrawEntities();
